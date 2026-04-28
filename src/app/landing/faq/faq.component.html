@@ -1,0 +1,55 @@
+<main class="flex-1 relative bg-[#17231E] flex items-center justify-center min-h-full pt-6 sm:pt-0">
+  <!-- Background Image -->
+  <img src="/assets/images/gamebg.svg" alt="Gaming Background" class="absolute inset-0 w-full h-auto object-cover z-0" />
+
+  <!-- Social Media Icons - Left vertical for desktop -->
+  <div class="absolute left-2 sm:left-4 top-[35%] sm:top-[45%] flex flex-col space-y-3 z-10 hidden sm:flex">
+    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
+      <img src="/assets/icons/facebook.svg" alt="Facebook" class="w-6 sm:w-8 h-6 sm:h-8">
+    </a>
+    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
+      <img src="/assets/icons/instagram.svg" alt="Instagram" class="w-6 sm:w-8 h-6 sm:h-8">
+    </a>
+    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
+      <img src="/assets/icons/x.svg" alt="X" class="w-6 sm:w-8 h-6 sm:h-8">
+    </a>
+    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
+      <img src="/assets/icons/YoutubeLogo.svg" alt="YouTube" class="w-6 sm:w-8 h-6 sm:h-8">
+    </a>
+    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
+      <img src="/assets/icons/TelegramLogo.svg" alt="Telegram" class="w-6 sm:w-8 h-6 sm:h-8">
+    </a>
+  </div>
+
+  <div class="container mx-auto relative z-10 flex justify-center pt-8 sm:pt-12">
+    <div class="w-full sm:w-[862px] space-y-8">
+      <!-- FAQ Heading -->
+      <h2 class="text-3xl font-bold text-white text-center">FAQ</h2>
+
+      <!-- FAQ Card -->
+      <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-6 shadow-lg space-y-4">
+        <div *ngFor="let faq of faqs; let i = index" class="space-y-2">
+          <!-- FAQ Question -->
+          <button
+            (click)="toggleFAQ(i)"
+            class="w-full sm:w-[782px] flex justify-between items-center px-4 py-2 bg-[#FFF9F0] text-black rounded-lg shadow hover:shadow-md transition duration-200 focus:outline-none"
+          >
+            <span class="font-medium">{{ faq.question }}</span>
+            <span class="font-bold text-xl">
+              {{ faq.open ? '-' : '+' }}
+            </span>
+          </button>
+
+          <!-- FAQ Answer -->
+          <div
+            *ngIf="faq.open"
+            class="mt-2 p-4 w-full sm:w-[782px] bg-[#FFF9F0] rounded-lg border-l-4 border-green-400 text-black"
+          >
+            <h3 class="font-semibold mb-1">{{ faq.answerTitle }}</h3>
+            <p>{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,18 @@
+<div class="w-screen h-screen overflow-hidden">
+  <ng-container *ngIf="serverError; else gameFrame">
+    <div class="flex items-center justify-center h-full bg-[#111] text-white p-6 text-center">
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Server unavailable</h2>
+        <p class="mb-4">{{ serverError }}</p>
+        <p class="text-sm text-gray-300">Start the ArchersWebb server with `npm start` or `npm run start:server` before opening this page.</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #gameFrame>
+    <div *ngIf="loading" class="flex items-center justify-center h-full bg-[#111] text-white">
+      <p class="text-lg">Checking ArchersWebb server status…</p>
+    </div>
+    <iframe *ngIf="!loading && gameUrl" [src]="gameUrl" class="w-full h-full border-none"></iframe>
+  </ng-template>
+</div>

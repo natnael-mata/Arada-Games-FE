@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Ultimate 🎮</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-overlay"></div>
+
+    <div class="game-container">
+        <h1 class="game-title">Tic Tac Toe</h1>
+
+        <div class="scoreboard">
+            <div class="score-box player-x active-turn" id="score-box-x">
+                <span class="player-label">Player 1 (X)</span>
+                <span class="score-value" id="score-x">0</span>
+            </div>
+            <div class="score-box player-o" id="score-box-o">
+                <span class="player-label">Player 2 (O)</span>
+                <span class="score-value" id="score-o">0</span>
+            </div>
+        </div>
+
+        <div class="turn-indicator" id="turn-indicator">Player 1's Turn</div>
+
+        <div class="board-wrapper">
+            <div class="board" id="board"></div>
+        </div>
+
+        <div class="controls">
+            <button id="new-round-btn" class="btn btn-primary">New Round</button>
+            <button id="reset-score-btn" class="btn btn-secondary">Reset Score</button>
+        </div>
+
+        <p id="message" class="message"></p>
+    </div>
+
+    <footer class="footer">
+        Multiplayer Game • Premium Edition
+    </footer>
+
+    <!-- Sound Effects -->
+    <audio id="click-sound" src="click.mp3"></audio>
+    <audio id="win-sound" src="win.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

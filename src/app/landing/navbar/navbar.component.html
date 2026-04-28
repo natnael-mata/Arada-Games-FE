@@ -1,0 +1,62 @@
+<!-- Navbar -->
+<nav class="flex items-center justify-between px-4 md:px-10 lg:px-14 py-4 relative z-50 bg-white shadow-md">
+  <!-- Logo -->
+  <div class="flex items-center space-x-2">
+    <img src="/assets/images/logo.svg" alt="Logo" class="h-8 w-8 rounded-full" />
+    <span class="relative text-[#1E2810] font-montserrat text-xl md:text-2xl font-semibold">
+      Budgetwise
+      <img src="/assets/images/logo2.svg" alt="Top Right Icon" class="absolute -top-1 -right-4" />
+    </span>
+  </div>
+
+  <!-- Hamburger (mobile only) -->
+  <div class="md:hidden">
+    <button (click)="toggleDrawer()" class="focus:outline-none">
+      <svg class="w-6 h-6 text-[#1E2810]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Desktop Links -->
+  <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold">Home</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold">How it works</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold">Features</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold">FAQ</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold">Contact Us</a>
+  </div>
+
+  <!-- Desktop Register Button -->
+  <div class="hidden md:flex">
+    <a href="#" class="flex h-10 px-5 py-2 justify-center items-center gap-2 rounded-lg bg-primary text-[#1E2810] font-montserrat text-base font-semibold">
+      Register Now
+    </a>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div *ngIf="isDrawerOpen" class="fixed inset-0 bg-white z-50 flex flex-col px-6 py-6 animate-slide-in-right md:hidden shadow-lg">
+  <!-- Close Button -->
+  <div class="flex justify-end mb-6">
+    <button (click)="closeDrawer()" class="text-[#1E2810] focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Nav Links -->
+  <nav class="flex flex-col space-y-4 text-left">
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold" (click)="closeDrawer()">Home</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold" (click)="closeDrawer()">How it works</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold" (click)="closeDrawer()">Features</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold" (click)="closeDrawer()">FAQ</a>
+    <a href="#" class="text-[#1E2810] font-montserrat text-base font-semibold" (click)="closeDrawer()">Contact Us</a>
+  </nav>
+
+  <!-- Mobile Register Button -->
+  <a href="#" class="mt-6 w-full text-center py-3 rounded-lg bg-primary text-[#1E2810] font-montserrat font-semibold" (click)="closeDrawer()">
+    Register Now
+  </a>
+</div>

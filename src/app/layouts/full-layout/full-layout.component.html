@@ -1,0 +1,24 @@
+<div class="flex min-h-screen font-jakarta bg-[#F6F7F9]">
+  <!-- Main Content Wrapper -->
+  <div class="flex flex-col flex-1 w-full transition-all duration-500 relative min-h-screen">
+    <!-- Top Navbar -->
+    <header *ngIf="!router.url.startsWith('/aradagame')"  class="sticky top-0 z-40 bg-white shadow-sm">
+      <app-navbar></app-navbar>
+    </header>
+
+    <!-- Content & Footer -->
+    <main class="flex flex-col flex-1 m-0 p-0">
+      <!-- Page Content -->
+      <section class="flex-1 m-0 p-0 relative overflow-hidden">
+        <div [@routeAnimations]="prepareRoute(routerOutlet)" class="h-full">
+          <router-outlet #routerOutlet="outlet"></router-outlet>
+        </div>
+      </section>
+
+      <!-- Footer always stays below -->
+      <footer *ngIf="!router.url.startsWith('/aradagame')" class="m-0 p-0">
+        <app-footer></app-footer>
+      </footer>
+    </main>
+  </div>
+</div>

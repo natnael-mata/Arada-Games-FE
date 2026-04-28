@@ -1,0 +1,28 @@
+<div
+  class="w-64 h-screen bg-white flex-col items-center py-6 shadow-md hidden md:flex"
+>
+  <!-- Logo Section -->
+  <div class="flex items-center space-x-2 mb-10 h-28">
+    <img src="assets/icons/logo.svg" alt="Logo" class="h-8 w-8" />
+    <span class="text-xl font-bold text-gray-800">Budgetwise</span>
+  </div>
+
+  <!-- Horizontal Line -->
+  <div class="w-full border-t border-gray-200 opacity-20 mb-10"></div>
+
+  <!-- Tabs Section -->
+  <nav class="flex flex-col space-y-4 w-full px-6">
+    <button
+      *ngFor="let item of navItems"
+      (click)="onNavClick(item)"
+      class="flex items-center space-x-3 w-full px-4 py-2 rounded-md font-medium transition-colors duration-200"
+      [class.bg-activeTab]="activeTab === item.id"
+      [class.text-black]="activeTab === item.id"
+      [class.hover:bg-gray-100]="activeTab !== item.id"
+      [class.text-gray-700]="activeTab !== item.id"
+    >
+      <img [src]="item.icon" [alt]="item.label" class="h-5 w-5" />
+      <span>{{ item.label }}</span>
+    </button>
+  </nav>
+</div>
