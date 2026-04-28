@@ -23,9 +23,9 @@ export class NavbarComponent {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    this.selectedLang = 'en'; // Reset lang or other state if needed
-    this.router.navigate(['/']); // Redirect to home
+    this.authService.logout();
+    this.selectedLang = 'en';
+    this.router.navigate(['/']);
   }
 }
 

@@ -31,6 +31,10 @@ export class AuthService {
   }
 
   logout() {
+    this.http.post(`${this.apiUrl}/logout`, {}).subscribe({
+      next: () => console.log('Backend logout success'),
+      error: (err) => console.error('Backend logout error', err)
+    });
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
     this.router.navigate(['/auth/login']);
