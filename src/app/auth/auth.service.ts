@@ -1,105 +1,47 @@
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-// import LoginResponse from './sign-in/login-response';
-// import { ForgotPasswordResponse, User } from './user';
 import { Router } from '@angular/router';
-const url = environment.baseUrl + 'open/auth/';
-const authUrl = environment.baseUrl + 'auth/';
-const profileUrl = environment.baseUrl + 'profile';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  helper = new JwtHelperService();
+  private apiUrl = environment.appApiUrl || '/api';
 
   constructor(private http: HttpClient, private router: Router) { }
-  isLoggedIn() {
-    return !!localStorage.getItem('access_token');
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('user');
   }
 
-  // login(data) {
-  //   return this.http.post<LoginResponse>(url + 'login', data);
-  // }
-
-  // decodedToken() {
-  //   return this.helper.decodeToken(this.tokenGetter());
-  // }
-
-  // permissions() {
-  //   return localStorage.getItem('permissions').split(',');
-  // }
-
-
-  tokenSetter(token: string) {
-    localStorage.setItem(
-      'permissions',
-      JSON.parse(this.helper.decodeToken(token).permissions).map(
-        (permission: { permissionName: string }) => permission.permissionName
-      )
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(response => {
+        if (response && response.ok) {
+          localStorage.setItem('user', JSON.stringify(response.user));
+          // Since we are not using JWT for this simple implementation, 
+          // we use the user presence to indicate login.
+          localStorage.setItem('access_token', 'true'); 
+        }
+      })
     );
-    return localStorage.setItem('access_token', token);
   }
 
-  // me() {
-  //   return this.http.get<User>(url + 'me');
-  // }
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/auth/login']);
+  }
 
-  // logout() {
-  //   return this.http.post(url + '/logout', {
-  //     token: localStorage.getItem('access_token'),
-  //   });
-  // }
-
-  // isAdmin() {
-  //   return JSON.parse(localStorage.getItem('user')).role.name == 'ADMIN';
-  // }
+  getUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
 
   tokenGetter() {
     return localStorage.getItem('access_token');
   }
-
-  // changePassword(value: any) {
-  //   return this.http.post(url + 'change-password', value);
-  // }
-
-  // isActive() {
-  //   return JSON.parse(localStorage.getItem('user'))?.active;
-  // }
-
-  // phoneConfirmation(data: any) {
-  //   return this.http.post<LoginResponse>(url + 'phone-confirmation', data);
-  // }
-
-  // sendOTPAgain() {
-  //   //send again.
-  // }
-
-  // resetPasswordConfirmation(param: any) {
-  //   return this.http.post(url + 'reset-password-verification', param);
-  // }
-
-  // forgotPassword(value: string) {
-  //   return this.http.get<ForgotPasswordResponse>(
-  //     url + 'forgot-password?phone=' + value
-  //   );
-  // }
-
-  // resetPassword(value: any) {
-  //   return this.http.post(url + 'reset-password', value);
-  // }
-
-  // canAccess(request: string) {
-  //   return this.permissions().includes(request);
-  // }
-
-  // getAllPermission() {
-  //   return this.http.get(authUrl + 'permission');
-  // }
-
-  // getUserPermission(roleId: number) {
-  //   return this.http.get(authUrl + 'role/findRolePermissions?roleId=' + roleId);
-  // }
 }
