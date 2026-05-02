@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from '../../shared/models/game.model';
 import { GamesApiService } from '../../shared/services/games-api.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-game',
@@ -18,7 +19,8 @@ export class GameComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private gamesApi: GamesApiService
+    private gamesApi: GamesApiService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -46,15 +48,18 @@ export class GameComponent implements OnInit {
   }
 
   private resolveGameLaunch(game: Game) {
+    const token = this.authService.tokenGetter();
+    const tokenParam = token ? `?token=${token}` : '';
+
     if (!game.launch.requiresHealthCheck) {
-      this.gameUrl = this.sanitizeUrl(game.launch.url);
+      this.gameUrl = this.sanitizeUrl(game.launch.url + tokenParam);
       this.loading = false;
       return;
     }
 
     this.gamesApi.checkGameHealth(game.slug).subscribe({
       next: (status) => {
-        this.gameUrl = this.sanitizeUrl(status.launchUrl);
+        this.gameUrl = this.sanitizeUrl(status.launchUrl + tokenParam);
         this.loading = false;
       },
       error: (error) => {

@@ -4,6 +4,7 @@ import { Title, Meta } from '@angular/platform-browser';
 import { NgForm } from '@angular/forms';
 import { ContactApiService } from '../../shared/services/contact-api.service';
 import { ContactRequest } from '../../shared/models/contact-request.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,7 +17,8 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private metaService: Meta,
-    private contactApi: ContactApiService
+    private contactApi: ContactApiService,
+    private authService: AuthService
   ) { }
 
   isTermsModalOpen = false;
@@ -81,6 +83,14 @@ export class LandingPageComponent implements OnInit {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
+  // Login Form Data
+  credentials = {
+    user_id: '',
+    password: ''
+  };
+  loading = false;
+  loginErrorMessage = '';
+
   // Games Catalog (Static display for landing page)
   gamesCatalog = [
     { name: 'Escape D', type: 'Action/Arcade', icon: '🏃' },
@@ -114,8 +124,21 @@ export class LandingPageComponent implements OnInit {
   }
 
   onLogin() {
-    localStorage.setItem('access_token', 'mock_token');
-    this.router.navigate(['/landing/game-list']);
+    this.loading = true;
+    this.loginErrorMessage = '';
+
+    this.authService.login(this.credentials).subscribe({
+      next: (response) => {
+        this.loading = false;
+        if (response.ok) {
+          this.router.navigate(['/landing/game-list']);
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.loginErrorMessage = err.error?.message || 'Login failed. Please check your credentials and try again.';
+      }
+    });
   }
 
   ngOnInit(): void {

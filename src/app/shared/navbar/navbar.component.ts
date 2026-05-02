@@ -13,7 +13,9 @@ export class NavbarComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+    const currentUrl = this.router.url.split('?')[0].split('#')[0];
+    const isLandingPage = currentUrl === '/' || currentUrl === '/landing';
+    return !isLandingPage && this.authService.isLoggedIn();
   }
 
   onLanguageChange(event: Event) {

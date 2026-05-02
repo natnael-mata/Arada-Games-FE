@@ -8,35 +8,64 @@
 
   <!-- Navigation Links -->
   <div class="flex-grow overflow-x-auto no-scrollbar mx-4">
-    <ul class="flex items-center space-x-8 whitespace-nowrap text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase">
-      <li><a routerLink="/" class="hover:text-primary transition-colors duration-300">Home</a></li>
-      <li><a routerLink="/landing/how-it-work" class="hover:text-primary transition-colors duration-300">How It Works</a></li>
-      <li><a routerLink="/landing/about-us" class="hover:text-primary transition-colors duration-300">About Us</a></li>
-      <li><a routerLink="/landing/faq" class="hover:text-primary transition-colors duration-300">FAQ</a></li>
-      <li><a routerLink="/landing/contact-us" class="hover:text-primary transition-colors duration-300">Contact</a></li>
+    <!-- Logged Out Links (Landing Page) -->
+    <ul *ngIf="!isLoggedIn" class="flex items-center space-x-8 whitespace-nowrap text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase">
+      <li><a routerLink="/landing" fragment="hero" class="hover:text-primary transition-colors duration-300 cursor-pointer">Home</a></li>
+      <li><a routerLink="/landing" fragment="gamelist" class="hover:text-primary transition-colors duration-300 cursor-pointer">Game List</a></li>
+      <li><a routerLink="/landing" fragment="whoweare" class="hover:text-primary transition-colors duration-300 cursor-pointer">Who We Are</a></li>
+      <li><a routerLink="/landing" fragment="howitworks" class="hover:text-primary transition-colors duration-300 cursor-pointer">How It Works</a></li>
+      <li><a routerLink="/landing" fragment="faq" class="hover:text-primary transition-colors duration-300 cursor-pointer">FAQ</a></li>
+      <li><a routerLink="/landing" fragment="contact" class="hover:text-primary transition-colors duration-300 cursor-pointer">Contact Us</a></li>
+    </ul>
+
+    <!-- Logged In Links (Game List Page) -->
+    <ul *ngIf="isLoggedIn" class="flex items-center space-x-8 whitespace-nowrap text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase">
+      <li><a routerLink="/landing/game-list" class="text-primary hover:text-white transition-colors duration-300 cursor-pointer">Home</a></li>
+      
+      <li class="relative group">
+        <a class="text-gray-400 hover:text-gray-300 transition-colors duration-300 cursor-not-allowed">Leaderboard</a>
+        <span class="absolute -top-3 -right-4 bg-primary/10 text-primary border border-primary/20 text-[8px] px-1.5 py-0.5 rounded font-black tracking-widest">SOON</span>
+      </li>
+      
+      <li class="relative group">
+        <a class="text-gray-400 hover:text-gray-300 transition-colors duration-300 cursor-not-allowed">Tournament</a>
+        <span class="absolute -top-3 -right-4 bg-primary/10 text-primary border border-primary/20 text-[8px] px-1.5 py-0.5 rounded font-black tracking-widest">SOON</span>
+      </li>
+      
+      <li class="relative group">
+        <a class="text-gray-400 hover:text-gray-300 transition-colors duration-300 cursor-not-allowed">Help</a>
+        <span class="absolute -top-3 -right-4 bg-primary/10 text-primary border border-primary/20 text-[8px] px-1.5 py-0.5 rounded font-black tracking-widest">SOON</span>
+      </li>
     </ul>
   </div>
 
   <!-- Right-side Utilities -->
-  <div class="flex-shrink-0 flex items-center space-x-3">
+  <div class="flex-shrink-0 flex items-center space-x-4">
     <!-- Language Selector -->
     <select [(ngModel)]="selectedLang" (change)="onLanguageChange($event)"
-      class="bg-transparent text-white border border-white/20 px-2 py-1 rounded-md cursor-pointer hover:border-primary focus:outline-none text-xs uppercase tracking-wider font-bold">
+      class="bg-transparent text-white border border-white/20 px-2 py-1.5 rounded-md cursor-pointer hover:border-primary focus:outline-none text-xs uppercase tracking-wider font-bold">
       <option value="en" class="text-black">EN</option>
       <option value="am" class="text-black">AM</option>
     </select>
 
     <!-- Profile & Logout -->
     <ng-container *ngIf="isLoggedIn">
-      <div class="h-4 w-[1px] bg-white/20 mx-1"></div>
-      <a routerLink="/landing/profile"
-        class="flex items-center space-x-2 text-white hover:text-primary transition-colors duration-300 group cursor-pointer">
-        <img src="/assets/icons/user.svg" alt="Profile" class="h-4 w-4 filter invert group-hover:brightness-75" />
+      <div class="h-6 w-[1px] bg-white/10 mx-2"></div>
+      
+      <!-- Avatar -->
+      <a routerLink="/landing/profile" class="relative group cursor-pointer">
+        <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center overflow-hidden group-hover:border-primary transition-all">
+          <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+          </svg>
+        </div>
       </a>
 
+      <!-- Logout Button (Text + Icon) -->
       <a (click)="logout()"
-        class="flex items-center space-x-2 text-white hover:text-primary transition-colors duration-300 group cursor-pointer">
-        <img src="/assets/icons/logout.svg" alt="Logout" class="h-4 w-4 filter invert group-hover:brightness-75" />
+        class="flex items-center space-x-2 px-3 py-1.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 cursor-pointer text-xs font-bold uppercase tracking-wider">
+        <span>Logout</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
       </a>
     </ng-container>
   </div>

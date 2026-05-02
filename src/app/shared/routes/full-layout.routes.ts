@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { AuthGuard } from './../guard/auth.guard';
 
 export const Full_ROUTES: Routes = [
   {
@@ -7,8 +7,9 @@ export const Full_ROUTES: Routes = [
     loadChildren: () =>
       import('./../../landing/landing.module').then((m) => m.LandingModule),
     },
-      {
+  {
     path: 'aradagame/:name',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./../../game/game.module').then((m) => m.GameModule),
     },

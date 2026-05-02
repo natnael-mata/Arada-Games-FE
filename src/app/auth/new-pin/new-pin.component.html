@@ -1,52 +1,54 @@
-<main class="flex-1 relative bg-[#17231E] flex items-center justify-center min-h-full">
-  <!-- Background Image -->
-  <img src="/assets/images/gamebg.svg" alt="Gaming Background" class="absolute inset-0 w-full h-auto object-cover z-0" />
-
-  <!-- Social Media Icons - Left vertical for desktop -->
-  <div class="absolute left-2 sm:left-4 top-[35%] sm:top-[45%] flex flex-col space-y-3 z-10 hidden sm:flex">
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/facebook.svg" alt="Facebook" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/instagram.svg" alt="Instagram" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/x.svg" alt="X" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/YoutubeLogo.svg" alt="YouTube" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/TelegramLogo.svg" alt="Telegram" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
+<main class="flex-1 relative bg-secondary font-exo flex flex-col min-h-screen pt-24 pb-12">
+  <!-- Subtle Grid Background -->
+  <div class="absolute inset-0 z-0 opacity-[0.03]" 
+       style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 50px 50px;">
   </div>
 
-  <!-- Sign In Box -->
-  <div class="container mx-auto px-4 relative z-10 flex justify-center mt-[100px]">
-    <div class="w-full max-w-sm md:max-w-md bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10 shadow-lg">
-      <h2 class="text-3xl font-bold text-white mb-4 sm:mb-6 text-center">
-        Verification
-      </h2>
-      <div class="mb-6 flex justify-center space-x-2">
-        <input type="text" class="w-[40px] h-[40px] border border-[#CDCDCD] rounded-lg text-center bg-[#FFF9F0]" maxlength="1" />
-        <input type="text" class="w-[40px] h-[40px] border border-[#CDCDCD] rounded-lg text-center bg-[#FFF9F0]" maxlength="1" />
-        <input type="text" class="w-[40px] h-[40px] border border-[#CDCDCD] rounded-lg text-center bg-[#FFF9F0]" maxlength="1" />
-        <input type="text" class="w-[40px] h-[40px] border border-[#CDCDCD] rounded-lg text-center bg-[#FFF9F0]" maxlength="1" />
-        <input type="text" class="w-[40px] h-[40px] border border-[#CDCDCD] rounded-lg text-center bg-[#FFF9F0]" maxlength="1" />
+  <div class="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex flex-col items-center justify-center">
+    
+    <div class="w-full max-w-md bg-forest-light/20 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+      
+      <!-- Ambient glow -->
+      <div class="absolute -top-32 -right-32 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/20 transition-all duration-1000"></div>
+
+      <div class="relative z-10 text-center mb-8">
+        <h2 class="text-3xl font-rajdhani font-black text-white uppercase tracking-tighter mb-1">
+          Identity <span class="text-primary italic">Verify</span>
+        </h2>
+        <p class="text-gray-500 text-[10px] font-medium tracking-widest uppercase">Enter 5-digit security code</p>
       </div>
-      <div class="mb-6 text-center text-white">
-        01:00
-      </div>
-      <div class="mb-6 text-center text-white">
-        Verification Code Will Be Sent in 60 Seconds
-      </div>
-      <div class="flex justify-center">
-        <button
-          class="w-full py-3 bg-[#2E3E38] text-white rounded-lg font-semibold hover:bg-[#2e3b36] transition-colors duration-300"
-        >
-          Verify
+
+      <div class="space-y-8 relative z-10">
+        <!-- OTP Inputs -->
+        <div class="flex justify-between gap-2">
+          <input type="text" class="w-12 h-14 bg-secondary/50 border border-white/10 rounded-xl text-center text-xl text-white font-rajdhani font-bold focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" maxlength="1" />
+          <input type="text" class="w-12 h-14 bg-secondary/50 border border-white/10 rounded-xl text-center text-xl text-white font-rajdhani font-bold focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" maxlength="1" />
+          <input type="text" class="w-12 h-14 bg-secondary/50 border border-white/10 rounded-xl text-center text-xl text-white font-rajdhani font-bold focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" maxlength="1" />
+          <input type="text" class="w-12 h-14 bg-secondary/50 border border-white/10 rounded-xl text-center text-xl text-white font-rajdhani font-bold focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" maxlength="1" />
+          <input type="text" class="w-12 h-14 bg-secondary/50 border border-white/10 rounded-xl text-center text-xl text-white font-rajdhani font-bold focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" maxlength="1" />
+        </div>
+
+        <div class="text-center space-y-2">
+          <div class="text-primary font-rajdhani font-bold text-xl tracking-wider animate-pulse">
+            01:00
+          </div>
+          <div class="text-gray-500 text-[10px] uppercase tracking-wider">
+            Resend transmission in 60s
+          </div>
+        </div>
+
+        <button routerLink="/auth/change-pass"
+          class="w-full py-3 bg-primary text-secondary font-rajdhani font-extrabold text-sm uppercase tracking-[0.15em] rounded-xl hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 shadow-xl active:translate-y-0">
+          Verify Identity
         </button>
       </div>
+
+      <div class="relative z-10 mt-6 text-center">
+        <a routerLink="/auth/forgot-password" class="text-gray-500 hover:text-primary transition-colors text-[10px] font-bold uppercase tracking-wider">
+          < Back to Request
+        </a>
+      </div>
+
     </div>
   </div>
 </main>

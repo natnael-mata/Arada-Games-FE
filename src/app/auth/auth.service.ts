@@ -14,17 +14,15 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+    return !!localStorage.getItem('access_token');
   }
 
   login(credentials: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
-        if (response && response.ok) {
+        if (response && response.ok && response.token) {
           localStorage.setItem('user', JSON.stringify(response.user));
-          // Since we are not using JWT for this simple implementation, 
-          // we use the user presence to indicate login.
-          localStorage.setItem('access_token', 'true'); 
+          localStorage.setItem('access_token', response.token); 
         }
       })
     );
@@ -37,12 +35,16 @@ export class AuthService {
     });
     localStorage.removeItem('user');
     localStorage.removeItem('access_token');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/landing']);
   }
 
   getUser() {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+  }
+
+  getProfile(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/profile`);
   }
 
   tokenGetter() {

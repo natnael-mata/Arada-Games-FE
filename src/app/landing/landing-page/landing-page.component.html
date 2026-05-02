@@ -1,254 +1,353 @@
 <main class="min-h-screen relative bg-secondary font-exo overflow-hidden flex flex-col">
   <!-- Subtle Grid Background (Global) -->
-  <div class="absolute inset-0 z-0 opacity-[0.03]" 
-       style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 50px 50px;">
+  <div class="absolute inset-0 z-0 opacity-[0.03]"
+    style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 50px 50px;">
   </div>
-  
-  <!-- Hero Wrapper (Limits BG Image to top) -->
-  <div class="relative min-h-screen flex flex-col">
-    <!-- Background Image Overlay (Now relative to this wrapper) -->
+
+  <!-- Hero Wrapper -->
+  <div id="hero" class="relative h-screen flex flex-col overflow-hidden">
+
+    <!-- Atmospheric background (very subtle, no characters here) -->
     <div class="absolute inset-0 z-0">
-      <img src="/assets/images/Arada.svg" alt="Gaming Background" class="w-full h-full object-cover opacity-20 mix-blend-overlay" />
-      <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/50"></div>
+      <img src="/assets/images/Arada.svg" alt="" aria-hidden="true" class="w-full h-full object-cover"
+        style="opacity: 0.07; filter: blur(4px) saturate(0.4);" />
+      <!-- Top / bottom vignette only -->
+      <div class="absolute inset-0"
+        style="background: linear-gradient(to bottom, rgba(13,22,18,0.65) 0%, transparent 20%, transparent 72%, rgba(13,22,18,1) 100%);">
+      </div>
+      <!-- Right-side darkness for UI readability — does NOT touch left 45% -->
+      <div class="absolute inset-0"
+        style="background: linear-gradient(to right, transparent 0%, transparent 42%, rgba(13,22,18,0.55) 55%, rgba(13,22,18,0.88) 68%, rgba(13,22,18,0.97) 80%);">
+      </div>
     </div>
 
-    <div class="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex flex-col justify-center pt-28 pb-20">
-      <!-- Hero & Login Section -->
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Hero Section -->
-        <div class="lg:col-span-7 space-y-8">
-          <div class="inline-flex items-center space-x-3 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+    <!-- Characters layer: gamers.svg as visible foreground on the left -->
+    <div class="absolute left-0 top-0 h-full pointer-events-none z-[1]" style="width: 62%;">
+      <img src="/assets/images/gamers.svg" alt="Arada Gamers" class="h-full w-full object-contain object-left-top"
+        style="filter: brightness(1.2) contrast(1.12) saturate(1.25);" />
+      <!-- Green atmospheric rim-light on faces -->
+      <div class="absolute inset-0"
+        style="background: radial-gradient(ellipse at 40% 38%, rgba(163,230,53,0.13) 0%, transparent 50%);"></div>
+      <!-- Seamless rightward fade — starts at 55% of this container -->
+      <div class="absolute top-0 right-0 h-full"
+        style="width: 40%; background: linear-gradient(to right, transparent 0%, rgba(13,22,18,1) 100%);"></div>
+      <!-- Bottom depth fade for grounding -->
+      <div class="absolute bottom-0 left-0 right-0"
+        style="height: 18%; background: linear-gradient(to top, rgba(13,22,18,0.75) 0%, transparent 100%);"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex flex-col justify-center pt-20 pb-4">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+
+        <!-- Breathing room: reserved for the visible characters -->
+        <div class="hidden lg:block lg:col-span-5"></div>
+
+        <!-- Hero text -->
+        <div class="lg:col-span-3 space-y-6">
+          <div
+            class="inline-flex items-center space-x-3 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span class="text-primary text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase font-rajdhani">Live Now: Community Challenge</span>
+            <span class="text-primary text-[10px] font-bold tracking-[0.2em] uppercase font-rajdhani">Live Now:
+              Community Challenge</span>
           </div>
-          
-          <p class="text-gray-400 text-base md:text-lg max-w-xl font-light leading-relaxed">
-            Join Ethiopia's premier gaming hub. Experience locally crafted challenges, 
-            compete with <span class="text-white font-semibold">100K+ players</span>, and dominate the leaderboard.
+
+          <h1
+            class="text-4xl xl:text-5xl font-rajdhani font-black text-white uppercase tracking-tighter leading-[1.05]">
+            Ethiopia's<br>
+            <span class="text-primary italic">Premier</span><br>
+            Gaming Hub
+          </h1>
+
+          <p class="text-gray-400 text-sm leading-relaxed font-light">
+            Compete with <span class="text-white font-semibold">100K+ players</span>.
+            Locally crafted challenges built for the Arada community.
           </p>
         </div>
 
-        <!-- Login Card (Decreased size) -->
-        <div class="lg:col-span-5 flex justify-center lg:justify-end">
-          <div class="w-full max-w-sm bg-forest-light/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+        <!-- Login card (clean, no stats) -->
+        <div class="lg:col-span-4">
+          <div
+            class="w-full bg-forest-light/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
             <!-- Ambient glow -->
-            <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000"></div>
-            
+            <div
+              class="absolute -top-20 -right-20 w-56 h-56 bg-primary/5 rounded-full blur-[90px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000">
+            </div>
+
             <div class="relative z-10">
-              <h2 class="text-3xl font-rajdhani font-bold text-white mb-1 italic tracking-tighter">LOG IN</h2>
-              <p class="text-gray-500 text-[10px] mb-8 font-medium tracking-wide uppercase">Welcome back, Commander.</p>
-              
-              <form class="space-y-5">
-                <div class="space-y-2">
-                  <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Access ID</label>
-                  <div class="relative">
-                    <input type="text" 
-                           class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
-                           placeholder="Enter your user name">
-                  </div>
+              <h2 class="text-2xl font-rajdhani font-bold text-white mb-1 italic tracking-tighter">LOG IN</h2>
+              <p class="text-gray-500 text-[10px] mb-4 font-medium tracking-wide uppercase">Welcome back, Commander.</p>
+
+              <form class="space-y-3">
+                <div class="space-y-1.5">
+                  <label
+                    class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Access
+                    ID</label>
+                  <input type="text" [(ngModel)]="credentials.user_id" name="user_id" required
+                    class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                    placeholder="Enter your phone number">
                 </div>
-                
-                <div class="space-y-2">
-                  <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Security Key</label>
-                  <div class="relative">
-                    <input type="password" 
-                           class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
-                           placeholder="••••••••••••">
-                  </div>
+
+                <div class="space-y-1.5">
+                  <label
+                    class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Security
+                    Key</label>
+                  <input type="password" [(ngModel)]="credentials.password" name="password" required
+                    class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                    placeholder="••••••••••••">
                 </div>
-                
+
                 <div class="flex items-center justify-between text-[10px] pt-1">
-                  <label class="flex items-center space-x-2 cursor-pointer text-gray-500 hover:text-gray-300 transition-colors">
-                    <input type="checkbox" class="form-checkbox w-3.5 h-3.5 bg-transparent border-white/10 rounded text-primary focus:ring-0 focus:ring-offset-0">
+                  <label
+                    class="flex items-center space-x-2 cursor-pointer text-gray-500 hover:text-gray-300 transition-colors">
+                    <input type="checkbox"
+                      class="form-checkbox w-3.5 h-3.5 bg-transparent border-white/10 rounded text-primary focus:ring-0 focus:ring-offset-0">
                     <span class="font-medium uppercase tracking-wider">Stay Synchronized</span>
                   </label>
-                  <a routerLink="/auth/forgot-password" class="text-primary/80 hover:text-primary font-bold transition-colors uppercase tracking-wider">Lost Access?</a>
+                  <a routerLink="/auth/forgot-password"
+                    class="text-primary/80 hover:text-primary font-bold transition-colors uppercase tracking-wider">Lost
+                    Access?</a>
                 </div>
-                
-                <button type="button" (click)="onLogin()"
-                        class="w-full py-4 bg-primary text-secondary font-rajdhani font-extrabold text-base uppercase tracking-[0.15em] rounded-xl hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 shadow-xl active:translate-y-0">
-                  Authorize Login
+
+                <p *ngIf="loginErrorMessage" class="text-xs text-red-500 font-bold uppercase tracking-wider text-center pt-2">{{ loginErrorMessage }}</p>
+
+                <button type="button" (click)="onLogin()" [disabled]="loading"
+                  class="w-full py-2.5 bg-primary text-secondary font-rajdhani font-extrabold text-sm uppercase tracking-[0.15em] rounded-xl hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 shadow-xl active:translate-y-0 disabled:opacity-50 disabled:hover:translate-y-0">
+                  {{ loading ? 'Authenticating...' : 'Authorize Login' }}
                 </button>
-                
-                <!-- Divider -->
-                <div class="relative flex items-center py-4">
+
+                <div class="relative flex items-center py-1">
                   <div class="flex-grow border-t border-white/5"></div>
-                  <span class="flex-shrink mx-4 text-gray-600 text-[9px] font-black uppercase tracking-[0.3em]">Sector Alpha</span>
+                  <span class="flex-shrink mx-3 text-gray-600 text-[9px] font-black uppercase tracking-[0.3em]">Sector
+                    Alpha</span>
                   <div class="flex-grow border-t border-white/5"></div>
                 </div>
-                
-                <div class="text-center space-y-4">
+
+                <div class="text-center space-y-2">
                   <p class="text-gray-500 text-[10px] font-medium italic">New pilot in the Arada system?</p>
                   <a href="https://cg.onevas.et/subscribe/176" target="_blank"
-                     class="block w-full py-3 border border-primary/20 text-primary rounded-xl font-rajdhani font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-300">
+                    class="block w-full py-2 border border-primary/20 text-primary rounded-xl font-rajdhani font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-300">
                     Create Account
                   </a>
                 </div>
               </form>
             </div>
           </div>
+        </div>
 
-          <!-- Compact Stats Bar (Below Login Box) -->
-          <div class="w-full max-w-sm mt-6 grid grid-cols-2 gap-4">
-            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
-              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Active Users</p>
-              <div class="flex items-baseline space-x-1">
-                <h4 class="text-2xl font-rajdhani font-bold text-white">100</h4>
-                <span class="text-primary font-bold text-sm">K+</span>
-              </div>
-            </div>
-            
-            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
-              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Daily Battles</p>
-              <div class="flex items-baseline space-x-1">
-                <h4 class="text-2xl font-rajdhani font-bold text-white">2.5</h4>
-                <span class="text-primary font-bold text-sm">M</span>
-              </div>
-            </div>
-            
-            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
-              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Modules</p>
-              <div class="flex items-baseline space-x-1">
-                <h4 class="text-2xl font-rajdhani font-bold text-white">15</h4>
-                <span class="text-primary font-bold text-sm">Live</span>
-              </div>
-            </div>
-            
-            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
-              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Win Rate</p>
-              <div class="flex items-baseline space-x-1">
-                <h4 class="text-2xl font-rajdhani font-bold text-white">42</h4>
-                <span class="text-primary font-bold text-sm">% AVG</span>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Stats footer bar — full width, pinned to bottom of hero -->
+    <div class="absolute bottom-0 left-0 right-0 z-10 border-t border-white/5"
+      style="background: linear-gradient(to top, rgba(13,22,18,0.95), rgba(13,22,18,0.6));">
+      <div class="container mx-auto px-6 md:px-12 py-3 flex items-center justify-around">
+        <div class="text-center group cursor-default">
+          <div class="flex items-baseline justify-center space-x-1">
+            <span class="text-2xl font-rajdhani font-black text-white">100</span>
+            <span class="text-primary font-black text-sm">K+</span>
           </div>
+          <p
+            class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors">
+            Active Users</p>
+        </div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center group cursor-default">
+          <div class="flex items-baseline justify-center space-x-1">
+            <span class="text-2xl font-rajdhani font-black text-white">2.5</span>
+            <span class="text-primary font-black text-sm">M</span>
+          </div>
+          <p
+            class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors">
+            Daily Battles</p>
+        </div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center group cursor-default">
+          <div class="flex items-baseline justify-center space-x-1">
+            <span class="text-2xl font-rajdhani font-black text-white">15</span>
+            <span class="text-primary font-black text-sm">Live</span>
+          </div>
+          <p
+            class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors">
+            Modules</p>
+        </div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center group cursor-default">
+          <div class="flex items-baseline justify-center space-x-1">
+            <span class="text-2xl font-rajdhani font-black text-white">42</span>
+            <span class="text-primary font-black text-sm">% AVG</span>
+          </div>
+          <p
+            class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.2em] group-hover:text-primary transition-colors">
+            Win Rate</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Game Catalog Section (Grid) -->
-  <div class="py-32 bg-forest-light/10 relative overflow-hidden border-y border-white/5">
-    <div class="container mx-auto px-6 md:px-12 mb-20">
+  <div id="gamelist" class="py-32 relative overflow-hidden border-y border-white/5">
+    <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/who-we-are-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+    <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+    <div class="container mx-auto px-6 md:px-12 mb-20 relative z-10">
       <div class="text-center space-y-4">
         <h2 class="text-4xl md:text-6xl font-rajdhani font-bold text-white uppercase tracking-tighter">
           Our Gaming <span class="text-primary italic">Portfolio</span>
         </h2>
-        <p class="text-gray-500 text-sm max-w-xl mx-auto font-medium tracking-wide uppercase">Explore our diverse collection of locally optimized modules</p>
+        <p class="text-gray-500 text-sm max-w-xl mx-auto font-medium tracking-wide uppercase">Explore our diverse
+          collection of locally optimized modules</p>
       </div>
     </div>
 
     <div class="container mx-auto px-6 md:px-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-        <div *ngFor="let game of gamesCatalog" 
-             class="group bg-secondary/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-forest-light/40 hover:border-primary/60 transition-all duration-700 hover:-translate-y-4 relative overflow-hidden shadow-2xl">
-          
+        <div *ngFor="let game of gamesCatalog"
+          class="group bg-secondary/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-forest-light/40 hover:border-primary/60 transition-all duration-700 hover:-translate-y-4 relative overflow-hidden shadow-2xl">
+
           <!-- Sample Pic Placeholder (Increased size) -->
-          <div class="aspect-video bg-secondary rounded-[1.5rem] mb-10 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-primary/40 transition-colors shadow-inner">
-            <span class="text-8xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110">{{ game.icon }}</span>
-            <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
-            <p class="relative z-10 text-[11px] font-black text-gray-500 uppercase tracking-[0.4em] mt-6">Game Module {{ game.name }}</p>
+          <div
+            class="aspect-video bg-secondary rounded-[1.5rem] mb-10 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-primary/40 transition-colors shadow-inner">
+            <span
+              class="text-8xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110">{{
+              game.icon }}</span>
+            <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60">
+            </div>
+            <p class="relative z-10 text-[11px] font-black text-gray-500 uppercase tracking-[0.4em] mt-6">Game Module {{
+              game.name }}</p>
           </div>
 
           <!-- Game Info -->
           <div class="space-y-6">
             <div class="flex flex-col space-y-2">
-              <h3 class="text-3xl font-rajdhani font-black text-white uppercase tracking-tighter group-hover:text-primary transition-colors duration-300">{{ game.name }}</h3>
+              <h3
+                class="text-3xl font-rajdhani font-black text-white uppercase tracking-tighter group-hover:text-primary transition-colors duration-300">
+                {{ game.name }}</h3>
               <div class="flex">
-                <span class="px-4 py-1.5 bg-primary/20 border border-primary/30 rounded-lg text-primary text-[10px] font-black uppercase tracking-widest shadow-lg">{{ game.type }}</span>
+                <span
+                  class="px-4 py-1.5 bg-primary/20 border border-primary/30 rounded-lg text-primary text-[10px] font-black uppercase tracking-widest shadow-lg">{{
+                  game.type }}</span>
               </div>
             </div>
-            
+
             <p class="text-gray-400 text-sm leading-relaxed font-medium">
-              Experience optimized performance and localized gameplay in this {{ game.type.toLowerCase() }} module. Built for the Arada community.
+              Experience optimized performance and localized gameplay in this {{ game.type.toLowerCase() }} module.
+              Built for the Arada community.
             </p>
           </div>
 
           <!-- Decorative Glow -->
-          <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] group-hover:bg-primary/20 transition-all duration-1000"></div>
+          <div
+            class="absolute -bottom-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] group-hover:bg-primary/20 transition-all duration-1000">
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Page Content (Rest of the page in a container) -->
-  <div class="container mx-auto px-6 md:px-12 relative z-10 space-y-32 pb-20">
-    
+  <div class="relative z-10 flex flex-col gap-y-32 pb-20">
+
     <!-- About Us Section -->
-    <div class="grid lg:grid-cols-12 gap-12 items-center border-t border-white/5 pt-32">
+    <div id="whoweare" class="relative w-full border-t border-white/5 pt-32 pb-16">
+      <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/who-we-are-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+      <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+      <div class="container mx-auto px-6 md:px-12 relative z-10 grid lg:grid-cols-12 gap-12 items-center">
       <div class="lg:col-span-6 space-y-6">
         <h2 class="text-4xl font-rajdhani font-bold text-white uppercase tracking-wider">
           Who We <span class="text-primary">Are</span>
         </h2>
-        <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative group overflow-hidden">
-          <div class="absolute -top-12 -left-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000"></div>
+        <div
+          class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative group overflow-hidden">
+          <div
+            class="absolute -top-12 -left-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000">
+          </div>
           <p class="text-gray-300 leading-relaxed font-light text-lg">
-            <span class="text-primary font-bold">Arada Games</span> is a collection of six highly engaging, culturally inspired mobile games built into one unified platform. 
-            Accessible through a VAS subscription model (2 ETB/day), it combines competitive multiplayer, casual solo play, and local flavor — built entirely for Ethiopian users.
+            <span class="text-primary font-bold">Arada Games</span> is a collection of six highly engaging, culturally
+            inspired mobile games built into one unified platform.
+            Accessible through a VAS subscription model (2 ETB/day), it combines competitive multiplayer, casual solo
+            play, and local flavor — built entirely for Ethiopian users.
           </p>
         </div>
       </div>
-      
+
       <div class="lg:col-span-6 grid grid-cols-2 gap-4">
         <!-- Feature Cards -->
-        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+        <div class="bg-secondary/40 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all shadow-xl">
           <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Multiplayer</h4>
           <p class="text-white text-sm">Compete with friends locally.</p>
         </div>
-        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+        <div class="bg-secondary/40 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all shadow-xl">
           <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Local Flavor</h4>
           <p class="text-white text-sm">Culturally inspired challenges.</p>
         </div>
-        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+        <div class="bg-secondary/40 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all shadow-xl">
           <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">VAS Model</h4>
           <p class="text-white text-sm">Simple 2 ETB/day access.</p>
         </div>
-        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+        <div class="bg-secondary/40 backdrop-blur-md p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all shadow-xl">
           <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Ethiopia #1</h4>
           <p class="text-white text-sm">Built for our community.</p>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- How It Works Section -->
-    <div class="border-t border-white/5 pt-32 space-y-12">
+    <div id="howitworks" class="relative w-full border-t border-white/5 pt-32 pb-16">
+      <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/who-we-are-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+      <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+      <div class="container mx-auto px-6 md:px-12 relative z-10 space-y-12">
       <div class="text-center space-y-4">
         <h2 class="text-4xl md:text-5xl font-rajdhani font-bold text-white uppercase tracking-widest">
           How It <span class="text-primary">Works</span>
         </h2>
-        <p class="text-gray-500 text-sm max-w-lg mx-auto font-medium tracking-wide">Follow these simple steps to join the Arada system and start your mission.</p>
+        <p class="text-gray-500 text-sm max-w-lg mx-auto font-medium tracking-wide">Follow these simple steps to join
+          the Arada system and start your mission.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Step 1 -->
         <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
-          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">01</div>
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">
+            01</div>
           <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Start Subscription</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Send <span class="text-primary font-bold">OK</span> to <span class="text-white font-bold">9000</span> via SMS. You will receive a welcome message confirming your entry.</p>
+          <p class="text-gray-400 text-sm leading-relaxed">Send <span class="text-primary font-bold">OK</span> to <span
+              class="text-white font-bold">9000</span> via SMS. You will receive a welcome message confirming your
+            entry.</p>
         </div>
 
         <!-- Step 2 -->
         <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
-          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">02</div>
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">
+            02</div>
           <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Access Details</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Use your phone number as username and the temporary password sent via SMS to access <span class="text-white font-bold">Arada-Games.et</span>.</p>
+          <p class="text-gray-400 text-sm leading-relaxed">Use your phone number as username and the temporary password
+            sent via SMS to access <span class="text-white font-bold">Arada-Games.et</span>.</p>
         </div>
 
         <!-- Step 3 -->
         <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
-          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">03</div>
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">
+            03</div>
           <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Explore & Win</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Dive into multiplayer challenges, earn coins, and dominate the leaderboard to win rewards.</p>
+          <p class="text-gray-400 text-sm leading-relaxed">Dive into multiplayer challenges, earn coins, and dominate
+            the leaderboard to win rewards.</p>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- FAQ Section -->
-    <div class="border-t border-white/5 pt-32 space-y-12">
+    <div id="faq" class="relative w-full border-t border-white/5 pt-32 pb-16">
+      <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/who-we-are-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+      <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+      <div class="container mx-auto px-6 md:px-12 relative z-10 space-y-12">
       <div class="text-center">
         <h2 class="text-4xl font-rajdhani font-bold text-white uppercase tracking-widest">
           Common <span class="text-primary">Questions</span>
@@ -257,44 +356,62 @@
 
       <div class="max-w-3xl mx-auto space-y-4">
         <div *ngFor="let faq of faqs; let i = index" class="group">
-          <button (click)="toggleFAQ(i)" 
-                  class="w-full flex justify-between items-center px-8 py-5 bg-white/5 border border-white/10 rounded-xl text-left hover:bg-white/10 transition-all duration-300">
+          <button (click)="toggleFAQ(i)"
+            class="w-full flex justify-between items-center px-8 py-5 bg-white/5 border border-white/10 rounded-xl text-left hover:bg-white/10 transition-all duration-300">
             <span class="font-rajdhani font-bold text-white uppercase tracking-wider text-sm">{{ faq.question }}</span>
-            <span class="text-primary text-xl font-black group-hover:rotate-90 transition-transform">{{ faq.open ? '−' : '+' }}</span>
+            <span class="text-primary text-xl font-black group-hover:rotate-90 transition-transform">{{ faq.open ? '−' :
+              '+' }}</span>
           </button>
-          <div *ngIf="faq.open" 
-               class="px-8 py-6 bg-primary/5 border-x border-b border-white/10 rounded-b-xl text-gray-300 text-sm leading-relaxed animate-fadeIn">
+          <div *ngIf="faq.open"
+            class="px-8 py-6 bg-primary/5 border-x border-b border-white/10 rounded-b-xl text-gray-300 text-sm leading-relaxed animate-fadeIn">
             <p class="font-bold text-primary mb-2 uppercase text-[10px] tracking-widest">{{ faq.answerTitle }}</p>
             {{ faq.answer }}
           </div>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Contact Us Section -->
-    <div class="border-t border-white/5 pt-32">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <div id="contact" class="relative w-full border-t border-white/5 pt-32 pb-20">
+      <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/who-we-are-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+      <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+      <div class="container mx-auto px-6 md:px-12 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="space-y-8">
           <h2 class="text-4xl md:text-5xl font-rajdhani font-bold text-white uppercase tracking-tighter">
             Need <span class="text-primary">Support?</span><br>
             Contact the Hub
           </h2>
           <p class="text-gray-400 max-w-md leading-relaxed">
-            Having trouble accessing your account or experiencing a technical glitch? 
+            Having trouble accessing your account or experiencing a technical glitch?
             Our support squad is standby 24/7 to assist you.
           </p>
           <div class="space-y-4">
             <div class="flex items-center space-x-4 group">
-              <div class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <div
+                class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                  </path>
+                </svg>
               </div>
-              <span class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">support@arada-games.et</span>
+              <span
+                class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">support@arada-games.et</span>
             </div>
             <div class="flex items-center space-x-4 group">
-              <div class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <div
+                class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
               </div>
-              <span class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">Addis Ababa, Ethiopia</span>
+              <span class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">Addis Ababa,
+                Ethiopia</span>
             </div>
           </div>
         </div>
@@ -302,45 +419,55 @@
         <div class="bg-forest-light/60 backdrop-blur-3xl border border-white/10 rounded-2xl p-10 shadow-2xl">
           <form #contactForm="ngForm" (ngSubmit)="submitContact(contactForm)" class="space-y-6">
             <div class="space-y-2">
-              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Full Name</label>
+              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Full
+                Name</label>
               <input type="text" name="fullName" [(ngModel)]="formData.fullName" required
-                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
-                     placeholder="John Doe">
+                class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                placeholder="John Doe">
             </div>
             <div class="space-y-2">
-              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Phone Number</label>
+              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Phone
+                Number</label>
               <input type="text" name="phoneNumber" [(ngModel)]="formData.phoneNumber" required
-                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
-                     placeholder="+251...">
+                class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                placeholder="+251...">
             </div>
             <div class="space-y-2">
-              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Message</label>
+              <label
+                class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Message</label>
               <textarea name="message" [(ngModel)]="formData.message" required rows="4"
-                        class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
-                        placeholder="How can we help?"></textarea>
+                class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                placeholder="How can we help?"></textarea>
             </div>
-            
-            <p *ngIf="successMessage" class="text-xs text-primary font-bold uppercase tracking-wider animate-pulse">{{ successMessage }}</p>
-            <p *ngIf="errorMessage" class="text-xs text-red-500 font-bold uppercase tracking-wider">{{ errorMessage }}</p>
+
+            <p *ngIf="successMessage" class="text-xs text-primary font-bold uppercase tracking-wider animate-pulse">{{
+              successMessage }}</p>
+            <p *ngIf="errorMessage" class="text-xs text-red-500 font-bold uppercase tracking-wider">{{ errorMessage }}
+            </p>
 
             <button type="submit" [disabled]="submitting"
-                    class="w-full py-5 bg-primary text-secondary font-rajdhani font-extrabold text-lg uppercase tracking-widest rounded-xl hover:bg-accent transition-all duration-300 shadow-xl disabled:opacity-50">
+              class="w-full py-5 bg-primary text-secondary font-rajdhani font-extrabold text-lg uppercase tracking-widest rounded-xl hover:bg-accent transition-all duration-300 shadow-xl disabled:opacity-50">
               {{ submitting ? 'Sending Message...' : 'Transmit Signal' }}
             </button>
           </form>
         </div>
       </div>
     </div>
+  </div>
 
   </div><!-- end: Page Content container -->
 
   <!-- Subscribe Modal (Legacy Support) -->
-  <div *ngIf="isSubscribeModalOpen" class="fixed inset-0 bg-secondary/95 backdrop-blur-2xl flex items-center justify-center z-[100] p-4">
-    <div class="bg-dark-surface border border-white/10 rounded-2xl w-full max-w-4xl h-[85vh] shadow-2xl relative flex flex-col overflow-hidden">
+  <div *ngIf="isSubscribeModalOpen"
+    class="fixed inset-0 bg-secondary/95 backdrop-blur-2xl flex items-center justify-center z-[100] p-4">
+    <div
+      class="bg-dark-surface border border-white/10 rounded-2xl w-full max-w-4xl h-[85vh] shadow-2xl relative flex flex-col overflow-hidden">
       <div class="p-4 border-b border-white/10 flex justify-between items-center bg-secondary">
         <h2 class="text-xl font-rajdhani font-bold text-white tracking-widest uppercase">Member Registration</h2>
         <button (click)="closeSubscribeModal()" class="text-gray-500 hover:text-primary transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
       </div>
       <iframe src="https://cg.onevas.et/subscribe/176" class="w-full flex-grow border-0" loading="lazy"></iframe>

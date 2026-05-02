@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { Game } from '../../shared/models/game.model';
 import { GamesApiService } from '../../shared/services/games-api.service';
+import { ContactApiService } from '../../shared/services/contact-api.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-game-list',
@@ -26,7 +28,19 @@ export class GameListComponent implements OnInit, AfterViewInit {
   maxIndex = 0;
   private viewReady = false;
 
-  constructor(private gamesApi: GamesApiService) {}
+  formData = {
+    fullName: '',
+    phoneNumber: '',
+    message: '',
+  };
+  submitting = false;
+  successMessage: string | null = null;
+  contactErrorMessage: string | null = null;
+
+  constructor(
+    private gamesApi: GamesApiService,
+    private contactApi: ContactApiService
+  ) {}
 
   ngOnInit(): void {
     this.gamesApi.getGames().subscribe({
@@ -89,5 +103,33 @@ export class GameListComponent implements OnInit, AfterViewInit {
     }
 
     setTimeout(() => this.updateMaxIndex());
+  }
+
+  submitContact(form: NgForm) {
+    if (form.invalid || this.submitting) {
+      return;
+    }
+
+    this.submitting = true;
+    this.successMessage = null;
+    this.contactErrorMessage = null;
+
+    this.contactApi.submit(this.formData).subscribe({
+      next: (response) => {
+        this.successMessage = response.message;
+        this.submitting = false;
+        this.formData = {
+          fullName: '',
+          phoneNumber: '',
+          message: '',
+        };
+        form.resetForm(this.formData);
+      },
+      error: (error) => {
+        this.contactErrorMessage =
+          error?.error?.message || 'We could not send your message right now. Please try again.';
+        this.submitting = false;
+      },
+    });
   }
 }
