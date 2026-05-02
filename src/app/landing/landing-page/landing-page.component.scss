@@ -1,0 +1,43 @@
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-container {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.game-card-wrapper {
+  flex: 0 0 33.333333%; /* Default to 3 at a time on large screens */
+  min-width: 350px; /* Ensure they don't get too small */
+  padding: 0 1rem;
+}
+
+@media (max-width: 1024px) {
+  .game-card-wrapper {
+    flex: 0 0 50%; /* 2 at a time */
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-card-wrapper {
+    flex: 0 0 100%; /* 1 at a time */
+    min-width: 280px;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

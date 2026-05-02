@@ -1,75 +1,349 @@
-<main class="flex-1 relative bg-[#17231E] flex items-center justify-center min-h-full">
-  <!-- Background Image -->
-  <img src="/assets/images/Arada.svg" alt="Gaming Background" class="absolute inset-0 w-full h-full object-cover z-0" />
+<main class="min-h-screen relative bg-secondary font-exo overflow-hidden flex flex-col">
+  <!-- Subtle Grid Background (Global) -->
+  <div class="absolute inset-0 z-0 opacity-[0.03]" 
+       style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 50px 50px;">
+  </div>
+  
+  <!-- Hero Wrapper (Limits BG Image to top) -->
+  <div class="relative min-h-screen flex flex-col">
+    <!-- Background Image Overlay (Now relative to this wrapper) -->
+    <div class="absolute inset-0 z-0">
+      <img src="/assets/images/Arada.svg" alt="Gaming Background" class="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+      <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/50"></div>
+    </div>
 
-  <!-- Social Media Icons -->
-  <div class="absolute left-2 sm:left-4 top-[35%] sm:top-[45%] flex flex-col space-y-3 z-10 hidden sm:flex">
-    <a href="#"><img src="/assets/icons/facebook.svg" class="w-6 sm:w-8 h-6 sm:h-8"></a>
-    <a href="#"><img src="/assets/icons/instagram.svg" class="w-6 sm:w-8 h-6 sm:h-8"></a>
-    <a href="#"><img src="/assets/icons/x.svg" class="w-6 sm:w-8 h-6 sm:h-8"></a>
-    <a href="#"><img src="/assets/icons/youtube.svg" class="w-6 sm:w-8 h-6 sm:h-8"></a>
-    <a href="#"><img src="/assets/icons/telegram.svg" class="w-6 sm:w-8 h-6 sm:h-8"></a>
+    <div class="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex flex-col justify-center pt-28 pb-20">
+      <!-- Hero & Login Section -->
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Section -->
+        <div class="lg:col-span-7 space-y-8">
+          <div class="inline-flex items-center space-x-3 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full backdrop-blur-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span class="text-primary text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase font-rajdhani">Live Now: Community Challenge</span>
+          </div>
+          
+          <p class="text-gray-400 text-base md:text-lg max-w-xl font-light leading-relaxed">
+            Join Ethiopia's premier gaming hub. Experience locally crafted challenges, 
+            compete with <span class="text-white font-semibold">100K+ players</span>, and dominate the leaderboard.
+          </p>
+        </div>
+
+        <!-- Login Card (Decreased size) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="w-full max-w-sm bg-forest-light/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+            <!-- Ambient glow -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000"></div>
+            
+            <div class="relative z-10">
+              <h2 class="text-3xl font-rajdhani font-bold text-white mb-1 italic tracking-tighter">LOG IN</h2>
+              <p class="text-gray-500 text-[10px] mb-8 font-medium tracking-wide uppercase">Welcome back, Commander.</p>
+              
+              <form class="space-y-5">
+                <div class="space-y-2">
+                  <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Access ID</label>
+                  <div class="relative">
+                    <input type="text" 
+                           class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                           placeholder="Enter your user name">
+                  </div>
+                </div>
+                
+                <div class="space-y-2">
+                  <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Security Key</label>
+                  <div class="relative">
+                    <input type="password" 
+                           class="w-full bg-secondary/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                           placeholder="••••••••••••">
+                  </div>
+                </div>
+                
+                <div class="flex items-center justify-between text-[10px] pt-1">
+                  <label class="flex items-center space-x-2 cursor-pointer text-gray-500 hover:text-gray-300 transition-colors">
+                    <input type="checkbox" class="form-checkbox w-3.5 h-3.5 bg-transparent border-white/10 rounded text-primary focus:ring-0 focus:ring-offset-0">
+                    <span class="font-medium uppercase tracking-wider">Stay Synchronized</span>
+                  </label>
+                  <a routerLink="/auth/forgot-password" class="text-primary/80 hover:text-primary font-bold transition-colors uppercase tracking-wider">Lost Access?</a>
+                </div>
+                
+                <button type="button" (click)="onLogin()"
+                        class="w-full py-4 bg-primary text-secondary font-rajdhani font-extrabold text-base uppercase tracking-[0.15em] rounded-xl hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 shadow-xl active:translate-y-0">
+                  Authorize Login
+                </button>
+                
+                <!-- Divider -->
+                <div class="relative flex items-center py-4">
+                  <div class="flex-grow border-t border-white/5"></div>
+                  <span class="flex-shrink mx-4 text-gray-600 text-[9px] font-black uppercase tracking-[0.3em]">Sector Alpha</span>
+                  <div class="flex-grow border-t border-white/5"></div>
+                </div>
+                
+                <div class="text-center space-y-4">
+                  <p class="text-gray-500 text-[10px] font-medium italic">New pilot in the Arada system?</p>
+                  <a href="https://cg.onevas.et/subscribe/176" target="_blank"
+                     class="block w-full py-3 border border-primary/20 text-primary rounded-xl font-rajdhani font-bold text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-300">
+                    Create Account
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Compact Stats Bar (Below Login Box) -->
+          <div class="w-full max-w-sm mt-6 grid grid-cols-2 gap-4">
+            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
+              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Active Users</p>
+              <div class="flex items-baseline space-x-1">
+                <h4 class="text-2xl font-rajdhani font-bold text-white">100</h4>
+                <span class="text-primary font-bold text-sm">K+</span>
+              </div>
+            </div>
+            
+            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
+              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Daily Battles</p>
+              <div class="flex items-baseline space-x-1">
+                <h4 class="text-2xl font-rajdhani font-bold text-white">2.5</h4>
+                <span class="text-primary font-bold text-sm">M</span>
+              </div>
+            </div>
+            
+            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
+              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Modules</p>
+              <div class="flex items-baseline space-x-1">
+                <h4 class="text-2xl font-rajdhani font-bold text-white">15</h4>
+                <span class="text-primary font-bold text-sm">Live</span>
+              </div>
+            </div>
+            
+            <div class="bg-secondary/40 backdrop-blur-md border border-white/5 rounded-xl p-4 group cursor-default">
+              <p class="text-gray-500 text-[8px] font-bold uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">Win Rate</p>
+              <div class="flex items-baseline space-x-1">
+                <h4 class="text-2xl font-rajdhani font-bold text-white">42</h4>
+                <span class="text-primary font-bold text-sm">% AVG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Sign In Box -->
-  <div class="container mx-auto px-4 relative z-10 flex justify-center md:justify-end mt-[120px]">
-    <div
-      class="w-full max-w-sm md:max-w-md bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10 shadow-lg">
-      <h2 class="text-3xl font-bold text-white mb-4 sm:mb-6 text-center">Sign in</h2>
-      <form class="space-y-5 sm:space-y-6">
+  <!-- Game Catalog Section (Grid) -->
+  <div class="py-32 bg-forest-light/10 relative overflow-hidden border-y border-white/5">
+    <div class="container mx-auto px-6 md:px-12 mb-20">
+      <div class="text-center space-y-4">
+        <h2 class="text-4xl md:text-6xl font-rajdhani font-bold text-white uppercase tracking-tighter">
+          Our Gaming <span class="text-primary italic">Portfolio</span>
+        </h2>
+        <p class="text-gray-500 text-sm max-w-xl mx-auto font-medium tracking-wide uppercase">Explore our diverse collection of locally optimized modules</p>
+      </div>
+    </div>
 
-        <!-- Username -->
-        <div>
-          <input type="text" placeholder="User name"
-            class="w-full h-[42px] px-4 border border-[#CDCDCD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#18281E] text-gray-800 bg-[#FFF9F0]">
-        </div>
-
-        <!-- Password -->
-        <div>
-          <input type="password" placeholder="Password"
-            class="w-full h-[42px] px-4 border border-[#CDCDCD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#18281E] text-gray-800 bg-[#FFF9F0]">
-        </div>
-
-        <!-- Remember & Forgot -->
-        <div class="flex items-center justify-between mt-2">
-          <div class="flex items-center space-x-2">
-            <input type="checkbox" id="remind" class="h-4 w-4 text-[#18281E] rounded focus:ring-[#18281E]">
-            <label for="remind" class="text-gray-700 text-sm">Remind me</label>
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div *ngFor="let game of gamesCatalog" 
+             class="group bg-secondary/60 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 hover:bg-forest-light/40 hover:border-primary/60 transition-all duration-700 hover:-translate-y-4 relative overflow-hidden shadow-2xl">
+          
+          <!-- Sample Pic Placeholder (Increased size) -->
+          <div class="aspect-video bg-secondary rounded-[1.5rem] mb-10 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-primary/40 transition-colors shadow-inner">
+            <span class="text-8xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110">{{ game.icon }}</span>
+            <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+            <p class="relative z-10 text-[11px] font-black text-gray-500 uppercase tracking-[0.4em] mt-6">Game Module {{ game.name }}</p>
           </div>
-          <a routerLink="/auth/forgot-password" class="text-sm text-[#18281E] hover:underline">Forget Password?</a>
+
+          <!-- Game Info -->
+          <div class="space-y-6">
+            <div class="flex flex-col space-y-2">
+              <h3 class="text-3xl font-rajdhani font-black text-white uppercase tracking-tighter group-hover:text-primary transition-colors duration-300">{{ game.name }}</h3>
+              <div class="flex">
+                <span class="px-4 py-1.5 bg-primary/20 border border-primary/30 rounded-lg text-primary text-[10px] font-black uppercase tracking-widest shadow-lg">{{ game.type }}</span>
+              </div>
+            </div>
+            
+            <p class="text-gray-400 text-sm leading-relaxed font-medium">
+              Experience optimized performance and localized gameplay in this {{ game.type.toLowerCase() }} module. Built for the Arada community.
+            </p>
+          </div>
+
+          <!-- Decorative Glow -->
+          <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] group-hover:bg-primary/20 transition-all duration-1000"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Content (Rest of the page in a container) -->
+  <div class="container mx-auto px-6 md:px-12 relative z-10 space-y-32 pb-20">
+    
+    <!-- About Us Section -->
+    <div class="grid lg:grid-cols-12 gap-12 items-center border-t border-white/5 pt-32">
+      <div class="lg:col-span-6 space-y-6">
+        <h2 class="text-4xl font-rajdhani font-bold text-white uppercase tracking-wider">
+          Who We <span class="text-primary">Are</span>
+        </h2>
+        <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative group overflow-hidden">
+          <div class="absolute -top-12 -left-12 w-32 h-32 bg-primary/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000"></div>
+          <p class="text-gray-300 leading-relaxed font-light text-lg">
+            <span class="text-primary font-bold">Arada Games</span> is a collection of six highly engaging, culturally inspired mobile games built into one unified platform. 
+            Accessible through a VAS subscription model (2 ETB/day), it combines competitive multiplayer, casual solo play, and local flavor — built entirely for Ethiopian users.
+          </p>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+        <!-- Feature Cards -->
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+          <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Multiplayer</h4>
+          <p class="text-white text-sm">Compete with friends locally.</p>
+        </div>
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+          <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Local Flavor</h4>
+          <p class="text-white text-sm">Culturally inspired challenges.</p>
+        </div>
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+          <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">VAS Model</h4>
+          <p class="text-white text-sm">Simple 2 ETB/day access.</p>
+        </div>
+        <div class="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-primary/30 transition-all">
+          <h4 class="text-primary font-rajdhani font-bold uppercase tracking-widest text-xs mb-2">Ethiopia #1</h4>
+          <p class="text-white text-sm">Built for our community.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="border-t border-white/5 pt-32 space-y-12">
+      <div class="text-center space-y-4">
+        <h2 class="text-4xl md:text-5xl font-rajdhani font-bold text-white uppercase tracking-widest">
+          How It <span class="text-primary">Works</span>
+        </h2>
+        <p class="text-gray-500 text-sm max-w-lg mx-auto font-medium tracking-wide">Follow these simple steps to join the Arada system and start your mission.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">01</div>
+          <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Start Subscription</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Send <span class="text-primary font-bold">OK</span> to <span class="text-white font-bold">9000</span> via SMS. You will receive a welcome message confirming your entry.</p>
         </div>
 
-        <!-- Login button -->
-        <button type="button" (click)="onLogin()"
-          class="w-full py-3 bg-[#18281E] text-white rounded-lg font-semibold hover:bg-[#0f1a14] transition-colors duration-300">
-          Log in
+        <!-- Step 2 -->
+        <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">02</div>
+          <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Access Details</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Use your phone number as username and the temporary password sent via SMS to access <span class="text-white font-bold">Arada-Games.et</span>.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-forest-light/40 backdrop-blur-xl border border-white/10 rounded-2xl p-8 relative group">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary text-secondary flex items-center justify-center rounded-xl font-rajdhani font-black text-2xl shadow-lg group-hover:scale-110 transition-transform">03</div>
+          <h3 class="text-xl font-rajdhani font-bold text-white mb-4 mt-2">Explore & Win</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Dive into multiplayer challenges, earn coins, and dominate the leaderboard to win rewards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="border-t border-white/5 pt-32 space-y-12">
+      <div class="text-center">
+        <h2 class="text-4xl font-rajdhani font-bold text-white uppercase tracking-widest">
+          Common <span class="text-primary">Questions</span>
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto space-y-4">
+        <div *ngFor="let faq of faqs; let i = index" class="group">
+          <button (click)="toggleFAQ(i)" 
+                  class="w-full flex justify-between items-center px-8 py-5 bg-white/5 border border-white/10 rounded-xl text-left hover:bg-white/10 transition-all duration-300">
+            <span class="font-rajdhani font-bold text-white uppercase tracking-wider text-sm">{{ faq.question }}</span>
+            <span class="text-primary text-xl font-black group-hover:rotate-90 transition-transform">{{ faq.open ? '−' : '+' }}</span>
+          </button>
+          <div *ngIf="faq.open" 
+               class="px-8 py-6 bg-primary/5 border-x border-b border-white/10 rounded-b-xl text-gray-300 text-sm leading-relaxed animate-fadeIn">
+            <p class="font-bold text-primary mb-2 uppercase text-[10px] tracking-widest">{{ faq.answerTitle }}</p>
+            {{ faq.answer }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="border-t border-white/5 pt-32">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="space-y-8">
+          <h2 class="text-4xl md:text-5xl font-rajdhani font-bold text-white uppercase tracking-tighter">
+            Need <span class="text-primary">Support?</span><br>
+            Contact the Hub
+          </h2>
+          <p class="text-gray-400 max-w-md leading-relaxed">
+            Having trouble accessing your account or experiencing a technical glitch? 
+            Our support squad is standby 24/7 to assist you.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4 group">
+              <div class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              </div>
+              <span class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">support@arada-games.et</span>
+            </div>
+            <div class="flex items-center space-x-4 group">
+              <div class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-secondary transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </div>
+              <span class="text-white font-rajdhani font-bold tracking-widest uppercase text-sm">Addis Ababa, Ethiopia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-forest-light/60 backdrop-blur-3xl border border-white/10 rounded-2xl p-10 shadow-2xl">
+          <form #contactForm="ngForm" (ngSubmit)="submitContact(contactForm)" class="space-y-6">
+            <div class="space-y-2">
+              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Full Name</label>
+              <input type="text" name="fullName" [(ngModel)]="formData.fullName" required
+                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                     placeholder="John Doe">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Phone Number</label>
+              <input type="text" name="phoneNumber" [(ngModel)]="formData.phoneNumber" required
+                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                     placeholder="+251...">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-primary text-[10px] font-bold uppercase tracking-widest ml-1 opacity-80">Message</label>
+              <textarea name="message" [(ngModel)]="formData.message" required rows="4"
+                        class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-primary/50 transition-all font-exo"
+                        placeholder="How can we help?"></textarea>
+            </div>
+            
+            <p *ngIf="successMessage" class="text-xs text-primary font-bold uppercase tracking-wider animate-pulse">{{ successMessage }}</p>
+            <p *ngIf="errorMessage" class="text-xs text-red-500 font-bold uppercase tracking-wider">{{ errorMessage }}</p>
+
+            <button type="submit" [disabled]="submitting"
+                    class="w-full py-5 bg-primary text-secondary font-rajdhani font-extrabold text-lg uppercase tracking-widest rounded-xl hover:bg-accent transition-all duration-300 shadow-xl disabled:opacity-50">
+              {{ submitting ? 'Sending Message...' : 'Transmit Signal' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end: Page Content container -->
+
+  <!-- Subscribe Modal (Legacy Support) -->
+  <div *ngIf="isSubscribeModalOpen" class="fixed inset-0 bg-secondary/95 backdrop-blur-2xl flex items-center justify-center z-[100] p-4">
+    <div class="bg-dark-surface border border-white/10 rounded-2xl w-full max-w-4xl h-[85vh] shadow-2xl relative flex flex-col overflow-hidden">
+      <div class="p-4 border-b border-white/10 flex justify-between items-center bg-secondary">
+        <h2 class="text-xl font-rajdhani font-bold text-white tracking-widest uppercase">Member Registration</h2>
+        <button (click)="closeSubscribeModal()" class="text-gray-500 hover:text-primary transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-
-        <!-- Subscribe Section -->
-        <div class="text-center text-sm text-gray-700 mt-4">
-          <p class="mb-3">Haven't subscribed yet? Subscribe here</p>
-          <a href="https://cg.onevas.et/subscribe/176" target="_blank"
-            class="block w-full py-3 border-2 border-[#18281E] text-[#18281E] rounded-lg text-lg font-bold text-center hover:bg-[#18281E] hover:text-white transition-colors duration-300">
-            Subscribe
-          </a>
-        </div>
-      </form>
+      </div>
+      <iframe src="https://cg.onevas.et/subscribe/176" class="w-full flex-grow border-0" loading="lazy"></iframe>
     </div>
   </div>
 </main>
-
-<!-- Subscribe Modal with iframe -->
-<div *ngIf="isSubscribeModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-xl w-[90%] max-w-4xl h-[80%] shadow-lg relative flex flex-col">
-
-    <!-- Close Button -->
-    <button (click)="closeSubscribeModal()"
-      class="absolute top-2 right-2 text-gray-500 hover:text-black text-lg font-bold z-10">
-      ✕
-    </button>
-
-    <!-- Iframe -->
-    <iframe src="https://cg.onevas.et/subscribe/176" class="w-full h-full rounded-b-xl border-0" loading="lazy">
-    </iframe>
-  </div>
-</div>

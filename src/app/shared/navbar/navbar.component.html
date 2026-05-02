@@ -1,47 +1,42 @@
 <nav
-  class="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center font-inter bg-[#17231E]">
-  <!-- Logo -->
-  <div class="flex-shrink-0 flex items-center mr-6">
-    <img src="/assets/logo/logo.svg" alt="Araidas Games" class="h-10 w-auto" />
+  class="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center font-rajdhani bg-secondary border-b border-white/10">
+  <!-- Logo & Glowing Dot -->
+  <div class="flex-shrink-0 flex items-center mr-6 relative">
+    <img src="/assets/logo/logo.svg" alt="Araidas Games" class="h-8 w-auto" />
+    <div class="ml-2 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#A3E635] animate-pulse"></div>
   </div>
 
-  <!-- Navigation Links (Scrollable on mobile) -->
+  <!-- Navigation Links -->
   <div class="flex-grow overflow-x-auto no-scrollbar mx-4">
-    <ul class="flex items-center space-x-6 whitespace-nowrap text-white text-sm md:text-base">
-      <li><a routerLink="/" class="hover:text-[#A8B4B0] transition-colors duration-300">Home</a></li>
-      <li><a routerLink="/landing/how-it-work" class="hover:text-[#A8B4B0] transition-colors duration-300">How It
-          Works</a></li>
-      <li><a routerLink="/landing/about-us" class="hover:text-[#A8B4B0] transition-colors duration-300">About Us</a>
-      </li>
-      <li><a routerLink="/landing/faq" class="hover:text-[#A8B4B0] transition-colors duration-300">FAQ</a></li>
-      <li><a routerLink="/landing/contact-us" class="hover:text-[#A8B4B0] transition-colors duration-300">Contact</a>
-      </li>
+    <ul class="flex items-center space-x-8 whitespace-nowrap text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase">
+      <li><a routerLink="/" class="hover:text-primary transition-colors duration-300">Home</a></li>
+      <li><a routerLink="/landing/how-it-work" class="hover:text-primary transition-colors duration-300">How It Works</a></li>
+      <li><a routerLink="/landing/about-us" class="hover:text-primary transition-colors duration-300">About Us</a></li>
+      <li><a routerLink="/landing/faq" class="hover:text-primary transition-colors duration-300">FAQ</a></li>
+      <li><a routerLink="/landing/contact-us" class="hover:text-primary transition-colors duration-300">Contact</a></li>
     </ul>
   </div>
 
-  <!-- Right-side Utilities (Language & Logout) -->
-  <div class="flex-shrink-0 flex items-center space-x-4">
+  <!-- Right-side Utilities -->
+  <div class="flex-shrink-0 flex items-center space-x-3">
     <!-- Language Selector -->
     <select [(ngModel)]="selectedLang" (change)="onLanguageChange($event)"
-      class="bg-transparent text-white border border-white px-2 py-1 rounded-lg cursor-pointer hover:border-[#A8B4B0] focus:outline-none text-sm">
+      class="bg-transparent text-white border border-white/20 px-2 py-1 rounded-md cursor-pointer hover:border-primary focus:outline-none text-xs uppercase tracking-wider font-bold">
       <option value="en" class="text-black">EN</option>
       <option value="am" class="text-black">AM</option>
     </select>
 
-    <!-- Profile & Logout (Conditional) -->
+    <!-- Profile & Logout -->
     <ng-container *ngIf="isLoggedIn">
-      <!-- Profile -->
+      <div class="h-4 w-[1px] bg-white/20 mx-1"></div>
       <a routerLink="/landing/profile"
-        class="flex items-center space-x-2 text-white hover:text-[#A8B4B0] transition-colors duration-300 group cursor-pointer">
-        <img src="/assets/icons/user.svg" alt="Profile" class="h-5 w-5 filter invert group-hover:brightness-75" />
-        <span class="hidden sm:inline">Profile</span>
+        class="flex items-center space-x-2 text-white hover:text-primary transition-colors duration-300 group cursor-pointer">
+        <img src="/assets/icons/user.svg" alt="Profile" class="h-4 w-4 filter invert group-hover:brightness-75" />
       </a>
 
-      <!-- Logout -->
       <a (click)="logout()"
-        class="flex items-center space-x-2 text-white hover:text-[#A8B4B0] transition-colors duration-300 group cursor-pointer">
-        <img src="/assets/icons/logout.svg" alt="Logout" class="h-5 w-5 filter invert group-hover:brightness-75" />
-        <span class="hidden sm:inline">Logout</span>
+        class="flex items-center space-x-2 text-white hover:text-primary transition-colors duration-300 group cursor-pointer">
+        <img src="/assets/icons/logout.svg" alt="Logout" class="h-4 w-4 filter invert group-hover:brightness-75" />
       </a>
     </ng-container>
   </div>

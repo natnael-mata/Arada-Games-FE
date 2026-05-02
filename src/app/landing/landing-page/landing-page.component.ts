@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
+import { NgForm } from '@angular/forms';
+import { ContactApiService } from '../../shared/services/contact-api.service';
+import { ContactRequest } from '../../shared/models/contact-request.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,7 +15,8 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private router: Router,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
+    private contactApi: ContactApiService
   ) { }
 
   isTermsModalOpen = false;
@@ -20,6 +24,72 @@ export class LandingPageComponent implements OnInit {
 
   // Subscribe modal state
   isSubscribeModalOpen = false;
+
+  // FAQ Data
+  faqs = [
+    {
+      question: 'How do I start playing Arada Games and log in?',
+      answerTitle: 'Instructions:',
+      answer: 'Send OK to 9000 via SMS. You’ll receive a welcome message with your game access link and login credentials.\nVisit Arada-Games.et.\nUse:\n● Username: Your phone number\n● Password: The one sent via SMS (you can change it after logging in)',
+      open: false
+    },
+    {
+      question: 'What kinds of games are available?',
+      answerTitle: 'Details:',
+      answer: 'The platform includes a mix of single-player and multiplayer games. Each game comes with:\n● Game rules\n● How-to-play instructions\n● Help section',
+      open: false
+    },
+    {
+      question: 'How can I check who is winning or leading?',
+      answerTitle: 'Leaderboard:',
+      answer: 'Go to the Leaderboard section to see top players, rankings, and high scores. Your nickname will appear there if you update your profile.',
+      open: false
+    },
+    {
+      question: 'Can I invite friends to Arada Games and earn coins?',
+      answerTitle: 'Referral & Coins:',
+      answer: 'Yes! Share your referral number or link. When someone joins using your referral, you earn free coins.\n1 coin = 1 day of access to Arada Games. Coins let you play all available games for the day.',
+      open: false
+    },
+    {
+      question: 'How much does the service cost?',
+      answerTitle: 'Subscription:',
+      answer: 'Arada Games is a subscription-based service. 2 Birr will be deducted daily from your airtime balance.',
+      open: false
+    },
+    {
+      question: 'Is there a free trial?',
+      answerTitle: 'Trial:',
+      answer: 'Yes. When you subscribe for the first time, you get a 3-day free trial. If you unsubscribe and then re-subscribe later, you will be charged immediately (no second trial).',
+      open: false
+    },
+    {
+      question: 'How do I unsubscribe?',
+      answerTitle: 'Unsubscribe:',
+      answer: 'Send STOP to 9000. You’ll receive a confirmation SMS and your subscription will be canceled.',
+      open: false
+    }
+  ];
+
+  // Contact Form Data
+  formData: ContactRequest = {
+    fullName: '',
+    phoneNumber: '',
+    message: '',
+  };
+  submitting = false;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
+
+  // Games Catalog (Static display for landing page)
+  gamesCatalog = [
+    { name: 'Escape D', type: 'Action/Arcade', icon: '🏃' },
+    { name: 'Archers ET', type: 'Archery', icon: '🏹' },
+    { name: 'Star War', type: 'Strategy/Action', icon: '🚀' },
+    { name: 'One Eye', type: 'Arcade', icon: '👁️' },
+    { name: 'Ludo', type: 'Board Game', icon: '🎲' },
+    { name: 'XO', type: 'Logic Puzzle', icon: '❌' }
+  ];
 
   openTermsModal() {
     this.isTermsModalOpen = true;
@@ -61,5 +131,37 @@ export class LandingPageComponent implements OnInit {
       { property: 'og:type', content: 'website' }
     ]);
 
+  }
+
+  toggleFAQ(index: number) {
+    this.faqs[index].open = !this.faqs[index].open;
+  }
+
+  submitContact(form: NgForm) {
+    if (form.invalid || this.submitting) {
+      return;
+    }
+
+    this.submitting = true;
+    this.successMessage = null;
+    this.errorMessage = null;
+
+    this.contactApi.submit(this.formData).subscribe({
+      next: (response) => {
+        this.successMessage = response.message;
+        this.submitting = false;
+        this.formData = {
+          fullName: '',
+          phoneNumber: '',
+          message: '',
+        };
+        form.resetForm(this.formData);
+      },
+      error: (error) => {
+        this.errorMessage =
+          error?.error?.message || 'We could not send your message right now. Please try again.';
+        this.submitting = false;
+      },
+    });
   }
 }

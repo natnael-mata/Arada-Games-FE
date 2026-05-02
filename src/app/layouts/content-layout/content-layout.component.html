@@ -1,8 +1,8 @@
-<div class="flex min-h-screen font-jakarta bg-[#F6F7F9]">
+<div class="flex min-h-screen bg-secondary">
   <!-- Main Content Wrapper -->
   <div class="flex flex-col flex-1 w-full transition-all duration-500 relative min-h-screen">
-    <!-- Top Navbar -->
-    <header class="sticky top-0 z-40 bg-white shadow-sm">
+    <!-- Top Navbar Wrapper (Transparent to let component handle it) -->
+    <header class="sticky top-0 z-40 bg-transparent">
       <app-navbar></app-navbar>
     </header>
 
@@ -15,8 +15,8 @@
         </div>
       </section>
 
-      <!-- Footer always stays below -->
-      <footer class="m-0 p-0">
+      <!-- Footer -->
+      <footer class="m-0 p-0 border-t border-white/5">
         <app-footer></app-footer>
       </footer>
     </main>

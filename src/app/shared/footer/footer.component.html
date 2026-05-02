@@ -1,64 +1,55 @@
-<footer class="bg-[#17231E] py-3 sm:py-4 text-white font-inter">
-  <!-- Stats (only on landing) -->
-  <div *ngIf="router.url === '/landing'"
-    class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0 text-center">
-    <div class="flex flex-col items-center space-y-1">
-      <span class="text-gray-400 text-lg">Players</span>
-      <div class="text-3xl font-semibold">
-        100K <span class="text-gray-400">+</span>
+<footer class="bg-secondary py-12 text-white font-exo border-t border-white/5">
+  <div class="container mx-auto px-6">
+    <!-- Bottom Row -->
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+      
+      <!-- Brand Info -->
+      <div class="flex items-center space-x-3">
+        <img src="/assets/logo/logo.svg" alt="Logo" class="h-6 w-auto" />
+        <div class="h-4 w-[1px] bg-white/20 mx-2"></div>
+        <span class="text-xs font-rajdhani font-bold uppercase tracking-[0.2em] text-gray-500">Arada Games</span>
       </div>
-    </div>
 
-    <div class="flex flex-col items-center space-y-1">
-      <span class="text-gray-400 text-lg">Success rate</span>
-      <div class="text-3xl font-semibold">
-        95 <span class="text-gray-400">%</span>
+      <!-- Social Media Ecosystem -->
+      <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+        <!-- YouTube -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/youtube.svg" alt="YouTube" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- TikTok -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/social.svg" alt="TikTok" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- Instagram -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/instagram.svg" alt="Instagram" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- Facebook -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/facebook.svg" alt="Facebook" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- X (Twitter) -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/x.svg" alt="X" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- Twitch -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/multiplayer.svg" alt="Twitch" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- Discord -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/User.svg" alt="Discord" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
+        <!-- Reddit -->
+        <a href="javascript:void(0)" class="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary hover:bg-primary hover:text-secondary transition-all duration-300 group shadow-[0_0_15px_rgba(163,230,53,0.1)] hover:shadow-[0_0_25px_rgba(163,230,53,0.3)]">
+          <img src="/assets/icons/Lightbulb.svg" alt="Reddit" class="w-5 h-5 filter-primary group-hover:brightness-0 transition-all">
+        </a>
       </div>
-    </div>
 
-    <div class="flex flex-col items-center space-y-1">
-      <span class="text-gray-400 text-lg">Years in business</span>
-      <div class="flex items-center justify-center space-x-2">
-        <div class="text-3xl font-semibold">4</div>
-        <img src="/assets/images/calendar.svg" alt="Years" class="w-6 h-6" />
+      <!-- Copyright -->
+      <div class="text-[10px] text-gray-600 font-bold uppercase tracking-widest text-center md:text-right">
+        © 2025 Kea Technologies | Developed by Alet
       </div>
-    </div>
-  </div>
-
-  <!-- Bottom Row -->
-  <div
-    class="container mx-auto px-4 mt-2 sm:mt-4 flex flex-col md:flex-row items-center justify-between relative space-y-4 md:space-y-0">
-
-    <!-- Social Media Icons (Visible on all screens) -->
-    <div class="flex justify-center space-x-4">
-      <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-        <img src="/assets/icons/facebook.svg" alt="Facebook" class="w-5 h-5">
-      </a>
-      <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-        <img src="/assets/icons/instagram.svg" alt="Instagram" class="w-5 h-5">
-      </a>
-      <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-        <img src="/assets/icons/x.svg" alt="X" class="w-5 h-5">
-      </a>
-      <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-        <img src="/assets/icons/YoutubeLogo.svg" alt="YouTube" class="w-5 h-5">
-      </a>
-      <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-        <img src="/assets/icons/TelegramLogo.svg" alt="Telegram" class="w-5 h-5">
-      </a>
-    </div>
-
-    <!-- Navigation Dots (Optional - Keeping as it exists in logic) -->
-    <div class="flex justify-center space-x-2 hidden sm:flex">
-      <span *ngFor="let route of routeOrder; let i = index" (click)="selectDot(i)"
-        class="w-2 h-2 rounded-full cursor-pointer transition-all duration-300"
-        [ngClass]="selectedDotIndex === i ? 'bg-white scale-110' : 'bg-gray-500 hover:bg-gray-300'">
-      </span>
-    </div>
-
-    <!-- Copyright -->
-    <div class="text-xs text-gray-500 text-center md:text-right">
-      © 2025 Kea Technologies | Developed by Alet Technologies
     </div>
   </div>
 </footer>

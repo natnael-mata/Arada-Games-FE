@@ -1,73 +1,88 @@
-<main class="flex-1 relative bg-[#17231E] flex items-center justify-center min-h-full">
-  <!-- Background Image -->
-  <img src="/assets/images/Arada.svg" alt="Gaming Background" class="absolute inset-0 w-full h-full object-cover z-0" />
-
-
-
-  <!-- Social Media Icons - Left vertical for desktop -->
-  <div class="absolute left-2 sm:left-4 top-[35%] sm:top-[45%] flex flex-col space-y-3 z-10 hidden sm:flex">
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/facebook.svg" alt="Facebook" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/instagram.svg" alt="Instagram" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/x.svg" alt="X" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/youtube.svg" alt="YouTube" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
-    <a href="#" class="transform transition-transform duration-300 hover:scale-110">
-      <img src="/assets/icons/telegram.svg" alt="Telegram" class="w-6 sm:w-8 h-6 sm:h-8">
-    </a>
+<main class="min-h-screen relative bg-secondary font-exo overflow-hidden flex items-center justify-center">
+  <!-- Subtle Grid Background -->
+  <div class="absolute inset-0 z-0 opacity-[0.03]" 
+       style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 40px 40px;">
+  </div>
+  
+  <!-- Background Image Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img src="/assets/images/Arada.svg" alt="Gaming Background" class="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+    <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary"></div>
   </div>
 
-  <!-- Sign In Box -->
-  <div class="container mx-auto px-4 relative z-10 flex justify-center md:justify-end mt-[120px]">
-    <div
-      class="w-full max-w-sm md:max-w-md bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10 shadow-lg">
-      <h2 class="text-3xl font-bold text-white mb-4 sm:mb-6 text-center">Sign in</h2>
+  <!-- Social Media Icons (Side Bar) -->
+  <div class="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col space-y-6 z-20 hidden xl:flex">
+    <div class="w-[1px] h-20 bg-gradient-to-t from-primary/50 to-transparent mx-auto mb-4"></div>
+    <a href="#" class="hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100"><img src="/assets/icons/facebook.svg" class="w-6 h-6 filter invert"></a>
+    <a href="#" class="hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100"><img src="/assets/icons/instagram.svg" class="w-6 h-6 filter invert"></a>
+    <a href="#" class="hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100"><img src="/assets/icons/x.svg" class="w-6 h-6 filter invert"></a>
+    <a href="#" class="hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100"><img src="/assets/icons/youtube.svg" class="w-6 h-6 filter invert"></a>
+    <a href="#" class="hover:scale-110 transition-transform duration-300 opacity-60 hover:opacity-100"><img src="/assets/icons/telegram.svg" class="w-6 h-6 filter invert"></a>
+    <div class="w-[1px] h-20 bg-gradient-to-b from-primary/50 to-transparent mx-auto mt-4"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10 flex justify-center lg:justify-end lg:pr-24">
+    <div class="w-full max-w-md bg-forest-light/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+      <!-- Ambient glow -->
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/10 transition-all duration-1000"></div>
       
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-500 bg-opacity-20 border border-red-500 rounded-lg text-red-100 text-sm text-center">
-        {{ errorMessage }}
-      </div>
-
-      <form class="space-y-5 sm:space-y-6" (ngSubmit)="onLogin()">
-        <!-- Username -->
-        <div>
-          <input type="text" placeholder="User name" name="user_id" [(ngModel)]="credentials.user_id" required
-            class="w-full h-[42px] px-4  border border-[#CDCDCD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#374842] text-gray-800 bg-[#FFF9F0]">
+      <div class="relative z-10">
+        <h2 class="text-4xl font-rajdhani font-bold text-white mb-2 italic tracking-tighter">LOG IN</h2>
+        <p class="text-gray-500 text-xs mb-10 font-medium tracking-wide uppercase">Enter your credentials to continue</p>
+        
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs font-bold uppercase tracking-wider text-center animate-pulse">
+          {{ errorMessage }}
         </div>
 
-        <!-- Password -->
-        <div>
-          <input type="password" placeholder="Password" name="password" [(ngModel)]="credentials.password" required
-            class="w-full h-[42px] px-4  border border-[#CDCDCD] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#374842] text-gray-800 bg-[#FFF9F0]">
-        </div>
-
-        <!-- Remind me + Forget password -->
-        <div class="flex items-center justify-between mt-2">
-          <div class="flex items-center space-x-2">
-            <input type="checkbox" id="remind" class="h-4 w-4 text-[#374842] rounded focus:ring-0">
-            <label for="remind" class="text-gray-700 text-sm">Remind me</label>
+        <form class="space-y-6" (ngSubmit)="onLogin()">
+          <div class="space-y-2.5">
+            <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Access ID</label>
+            <div class="relative">
+              <input type="text" name="user_id" [(ngModel)]="credentials.user_id" required
+                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                     placeholder="Enter your user name">
+            </div>
           </div>
-          <a routerLink="/auth/forgot-password" class="text-sm text-gray-700 hover:underline">Forget Password?</a>
-        </div>
-
-        <!-- Login Button -->
-        <button type="submit" [disabled]="loading"
-          class="w-full py-3 bg-[#2E3E38] text-white rounded-lg font-semibold hover:bg-[#2e3b36] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-          {{ loading ? 'Logging in...' : 'Log in' }}
-        </button>
-
-        <!-- Sign Up Link -->
-        <p class="text-center text-sm text-gray-700 mt-4">
-          Don't have an account?
-          <a href="#" class="text-[#2E3E38] font-semibold hover:underline">Sign up here</a>
-        </p>
-      </form>
+          
+          <div class="space-y-2.5">
+            <label class="block text-primary text-[10px] font-bold uppercase tracking-[0.2em] ml-1 opacity-80">Security Key</label>
+            <div class="relative">
+              <input type="password" name="password" [(ngModel)]="credentials.password" required
+                     class="w-full bg-secondary/50 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all font-exo"
+                     placeholder="••••••••••••">
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-[11px] pt-1">
+            <label class="flex items-center space-x-2 cursor-pointer text-gray-500 hover:text-gray-300 transition-colors">
+              <input type="checkbox" class="form-checkbox w-4 h-4 bg-transparent border-white/10 rounded text-primary focus:ring-0 focus:ring-offset-0">
+              <span class="font-medium uppercase tracking-wider">Stay Synced</span>
+            </label>
+            <a routerLink="/auth/forgot-password" class="text-primary/80 hover:text-primary font-bold transition-colors uppercase tracking-wider">Forgot?</a>
+          </div>
+          
+          <button type="submit" [disabled]="loading"
+                  class="w-full py-5 bg-primary text-secondary font-rajdhani font-extrabold text-lg uppercase tracking-[0.15em] rounded-xl hover:bg-accent hover:-translate-y-0.5 transition-all duration-300 shadow-xl active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ loading ? 'Authorizing...' : 'Authorize Login' }}
+          </button>
+          
+          <!-- Divider -->
+          <div class="relative flex items-center py-6">
+            <div class="flex-grow border-t border-white/5"></div>
+            <span class="flex-shrink mx-6 text-gray-600 text-[10px] font-black uppercase tracking-[0.3em]">Protocol X</span>
+            <div class="flex-grow border-t border-white/5"></div>
+          </div>
+          
+          <div class="text-center space-y-5">
+            <p class="text-gray-500 text-xs font-medium italic">New pilot in the Arada system?</p>
+            <a href="https://cg.onevas.et/subscribe/176" target="_blank"
+               class="block w-full py-4 border-2 border-primary/20 text-primary rounded-xl font-rajdhani font-bold text-sm uppercase tracking-[0.2em] hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-300">
+              Create Account
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </main>
