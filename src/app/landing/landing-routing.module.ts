@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 import { AuthGuard } from '../shared/guard/auth.guard'; // Import AuthGuard
 
@@ -23,6 +24,12 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard], // Protect route
     data: { animation: 'ProfilePage' }
+  },
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent,
+    canActivate: [AuthGuard], // Protect route
+    data: { animation: 'LeaderboardPage' }
   }
 ];
 

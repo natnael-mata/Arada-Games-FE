@@ -93,12 +93,11 @@ export class LandingPageComponent implements OnInit {
 
   // Games Catalog (Static display for landing page)
   gamesCatalog = [
-    { name: 'Escape D', type: 'Action/Arcade', icon: '🏃' },
-    { name: 'Archers ET', type: 'Archery', icon: '🏹' },
-    { name: 'Star War', type: 'Strategy/Action', icon: '🚀' },
-    { name: 'One Eye', type: 'Arcade', icon: '👁️' },
-    { name: 'Ludo', type: 'Board Game', icon: '🎲' },
-    { name: 'XO', type: 'Logic Puzzle', icon: '❌' }
+    { name: 'Escape Demb', type: 'Action/Arcade', icon: '🏃', image: '/assets/images/escape_d_poster.jpg' },
+    { name: 'Archers ET', type: 'Archery', icon: '🏹', image: '/assets/images/archers_poster.png' },
+    { name: 'Star War', type: 'Strategy/Action', icon: '🚀', image: '/assets/images/My Planet.png' },
+    { name: 'One Eye', type: 'Arcade', icon: '👁️', image: '/assets/images/One Eye.png' },
+    { name: 'XO', type: 'Logic Puzzle', icon: '❌', image: '/assets/images/xo_poster.jpg' }
   ];
 
   openTermsModal() {
@@ -146,10 +145,10 @@ export class LandingPageComponent implements OnInit {
     this.titleService.setTitle('Arada Games – From Arada to Aradas | Locally Made Fun – Arada-Games.et');
 
     this.metaService.addTags([
-      { name: 'description', content: 'Play Escape Dubm & Kabo on Arada Games—Ethiopia’s local gaming hub. 100K+ players. Ethio Telecom VAS subscription. From Arada to Aradas!' },
-      { name: 'keywords', content: 'Adara Games, Ethiopian gaming platform, locally developed games Ethiopia, mobile games Ethiopia, Arada Games, Ethiopian multiplayer games, subscription-based games Ethiopia, VAS games Ethio Telecom, Ethio Telecom games, play games on Ethio Telecom, Escape Dubm game, endless runner Ethiopia, local endless runner game, multiplayer games Ethiopia, online games Ethiopia, 100k+ players games, best Ethiopian games, trending games in Ethiopia, Ethiopian game subscription, new mobile games Ethiopia, gaming with friends Ethiopia, local game developers Ethiopia' },
+      { name: 'description', content: 'Play Escape Demb & Kabo on Arada Games—Ethiopia’s local gaming hub. 100K+ players. Ethio Telecom VAS subscription. From Arada to Aradas!' },
+      { name: 'keywords', content: 'Adara Games, Ethiopian gaming platform, locally developed games Ethiopia, mobile games Ethiopia, Arada Games, Ethiopian multiplayer games, subscription-based games Ethiopia, VAS games Ethio Telecom, Ethio Telecom games, play games on Ethio Telecom, Escape Demb game, endless runner Ethiopia, local endless runner game, multiplayer games Ethiopia, online games Ethiopia, 100k+ players games, best Ethiopian games, trending games in Ethiopia, Ethiopian game subscription, new mobile games Ethiopia, gaming with friends Ethiopia, local game developers Ethiopia' },
       { property: 'og:title', content: 'Arada Games – From Arada to Aradas | Locally Made Fun' },
-      { property: 'og:description', content: 'Ethiopia’s #1 local gaming hub with Escape Dubm & Kabo. 100K+ players. Ethio Telecom subscription available.' },
+      { property: 'og:description', content: 'Ethiopia’s #1 local gaming hub with Escape Demb & Kabo. 100K+ players. Ethio Telecom subscription available.' },
       { property: 'og:url', content: 'https://Arada-Games.et' },
       { property: 'og:type', content: 'website' }
     ]);

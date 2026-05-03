@@ -67,6 +67,23 @@ body {
     transform: translate(0%, -125%);
 }
 
+#high-score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--root-clr);
+    filter: brightness(1.5);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 #game_alert {
     padding: 1rem 2rem;
     font-size: 16px;

@@ -210,12 +210,13 @@
           <!-- Sample Pic Placeholder (Increased size) -->
           <div
             class="aspect-video bg-secondary rounded-[1.5rem] mb-10 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-primary/40 transition-colors shadow-inner">
-            <span
+            <img *ngIf="game.image" [src]="game.image" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-700" [alt]="game.name">
+            <span *ngIf="!game.image"
               class="text-8xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110">{{
               game.icon }}</span>
             <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60">
             </div>
-            <p class="relative z-10 text-[11px] font-black text-gray-500 uppercase tracking-[0.4em] mt-6">Game Module {{
+            <p class="relative z-10 text-[11px] font-black text-white uppercase tracking-[0.4em] mt-6 drop-shadow-lg">Game Module {{
               game.name }}</p>
           </div>
 

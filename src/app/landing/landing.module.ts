@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProfileComponent } from './profile/profile.component';
     NavbarComponent,
     FooterComponent,
     GameListComponent,
-    ProfileComponent
+    ProfileComponent,
+    LeaderboardComponent
   ],
   imports: [
     CommonModule,

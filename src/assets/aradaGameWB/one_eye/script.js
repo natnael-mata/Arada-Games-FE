@@ -3,6 +3,46 @@ const gc_loc = gc.getBoundingClientRect()
 const player = 'player2'
 var pl;
 
+// Get token from URL
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+async function saveScore(scoreValue) {
+    if (!token) return;
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                score: scoreValue,
+                game_mode: 'single',
+                game_slug: 'one-eye',
+                result: 'win'
+            })
+        });
+        fetchHighScore();
+    } catch (e) {
+        console.error('Failed to save score:', e);
+    }
+}
+
+async function fetchHighScore() {
+    try {
+        const response = await fetch('/api/scores/leaderboard?game=one-eye');
+        const data = await response.json();
+        if (data && data.length > 0) {
+            const highScore = data[0].score;
+            const hsElement = document.getElementById('high-score');
+            if (hsElement) hsElement.innerText = 'High Score: ' + highScore;
+        }
+    } catch (e) {
+        console.error('Failed to fetch high score:', e);
+    }
+}
+
 var cols = 40 // multiple of 16
 var rows = 22 // multiple of 9
 const tile_size = gc_loc.width * (100 / cols / 100)
@@ -162,14 +202,17 @@ const levels = [
 ]
 
 function buildGame() {
-    // clear tiles and update level number
-    gc.innerHTML = "<div id='" + player + "'></div><div id='game_alert'></div><div id='deaths_counter'></div><div id='time_counter'></div>"
+    // Check if UI already exists, if not, create it
+    if (!document.getElementById('player2')) {
+        gc.innerHTML = "<div id='" + player + "'></div><div id='game_alert'></div><div id='deaths_counter'></div><div id='time_counter'></div><div id='high-score'></div>"
+    }
     if (level_num < levels.length - 1) {
         level_num++
     } else {
         level_num = 0
     }
 
+    // set random level color
     let time = 0
     let deaths = 0
     let tc = document.querySelector('#time_counter')
@@ -179,6 +222,10 @@ function buildGame() {
 
     // set random level color
     document.body.style.setProperty('--root-clr', 'hsl(' + Math.random() * 360 + 'deg,75%,50%)')
+
+    // clear previous tiles but keep UI
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(t => t.remove());
 
     // add tiles for new level
     for (var i = 0; i < cols * rows; i++) {
@@ -373,6 +420,7 @@ function buildGame() {
             }
 
             if (pl_center.classList.contains('nextlevel')) {
+                saveScore(100);
                 buildGame()
             }
 
@@ -449,6 +497,7 @@ function buildGame() {
 
 window.addEventListener('load', function () {
     buildGame();
+    fetchHighScore();
 })
 window.focus()
 

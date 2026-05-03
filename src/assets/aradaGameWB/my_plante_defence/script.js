@@ -1,30 +1,67 @@
+// Global state
+let globalRecord = 0;
+
 // Verify assets are loaded
 console.log('Game script loaded. Assets should be in img/ directory.');
 
-window.addEventListener("DOMContentLoaded", game);
+// Get token from URL
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+async function saveScore(score) {
+    if (!token) return;
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                score: score,
+                game_mode: 'single',
+                game_slug: 'my-planet',
+                result: 'win'
+            })
+        });
+        fetchHighScore();
+    } catch (e) {
+        console.error('Failed to save score:', e);
+    }
+}
+
+async function fetchHighScore() {
+    try {
+        const response = await fetch('/api/scores/leaderboard?game=my-planet');
+        const data = await response.json();
+        if (data && data.length > 0) {
+            globalRecord = parseInt(data[0].score);
+            const hsElement = document.getElementById('high-score');
+            if (hsElement) hsElement.innerText = 'High Score: ' + globalRecord;
+        }
+    } catch (e) {
+        console.error('Failed to fetch high score:', e);
+    }
+}
 
 // General sprite load
 var sprite = new Image();
 var spriteExplosion = new Image();
-// CHANGED: Local path
 sprite.src = 'img/sprite.png';
 
 window.onload = function () {
-    // CHANGED: Local path
     spriteExplosion.src = 'img/explosion.png';
-
-    // Intro Screen Logic
-    setTimeout(function () {
-        var intro = document.getElementById('intro-screen');
-        if (intro) {
-            intro.classList.add('hidden');
-        }
-    }, 2500);
+    fetchHighScore();
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+    fetchHighScore().then(() => {
+        game();
+    });
+});
 
 // Game
 function game() {
-
     // Canvas
     var canvas = document.getElementById('canvas'),
         ctx = canvas.getContext('2d'),
@@ -36,7 +73,7 @@ function game() {
         asteroids = [],
         explosions = [],
         destroyed = 0,
-        record = 0,
+        record = globalRecord,
         count = 0,
         playing = false,
         gameOver = false,
@@ -93,7 +130,8 @@ function game() {
                         asteroids = [];
                         explosions = [];
                         destroyed = 0;
-                        document.getElementById('live-score').innerText = 'Score: ' + destroyed; // Reset Score
+                        record = globalRecord; // Reset record from global
+                        document.getElementById('live-score').innerText = 'Score: ' + destroyed;
                         player.deg = 0;
                         canvas.removeEventListener('contextmenu', action);
                         canvas.removeEventListener('mousemove', move);
@@ -165,7 +203,6 @@ function game() {
 
                         if (distance < (((asteroids[j].width / asteroids[j].size) / 2) - 4) + ((19 / 2) - 4)) {
                             destroyed += 1;
-                            // Update Live Score
                             document.getElementById('live-score').innerText = 'Score: ' + destroyed;
                             asteroids[j].destroyed = true;
                             bullets[i].destroyed = true;
@@ -363,14 +400,9 @@ function game() {
 
     function start() {
         if (!gameOver) {
-            // Clear
             ctx.clearRect(0, 0, cW, cH);
             ctx.beginPath();
-
-            // Planet
             planet();
-
-            // Player
             _player();
 
             if (playing) {
@@ -380,7 +412,7 @@ function game() {
                 ctx.fillStyle = "white";
                 ctx.textBaseline = 'middle';
                 ctx.textAlign = "right";
-                ctx.fillText('Record: ' + record + '', cW - 20, 30);
+                ctx.fillText('Record: ' + (globalRecord > record ? globalRecord : record) + '', cW - 20, 30);
 
                 ctx.font = "40px Orbitron, sans-serif";
                 ctx.fillStyle = "white";
@@ -410,14 +442,16 @@ function game() {
             ctx.fillText("Total destroyed: " + destroyed, cW / 2, cH / 2 + 140);
 
             record = destroyed > record ? destroyed : record;
+            if (record > globalRecord) globalRecord = record;
 
             ctx.font = "20px Orbitron, sans-serif";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
             ctx.fillText("RECORD: " + record, cW / 2, cH / 2 + 185);
 
-            ctx.drawImage(sprite, 500, 18, 70, 70, cW / 2 - 35, cH / 2 + 40, 70, 70);
+            saveScore(destroyed);
 
+            ctx.drawImage(sprite, 500, 18, 70, 70, cW / 2 - 35, cH / 2 + 40, 70, 70);
             canvas.removeAttribute('class');
         }
     }
@@ -429,7 +463,6 @@ function game() {
 
     init();
 
-    // Utils
     function random(from, to) {
         return Math.floor(Math.random() * (to - from + 1)) + from;
     }

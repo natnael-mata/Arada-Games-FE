@@ -1,0 +1,91 @@
+<main class="flex-1 relative bg-secondary font-exo flex flex-col min-h-screen pt-24 pb-12 overflow-hidden">
+  
+  <!-- Fixed Parallax Image Background -->
+  <div class="absolute inset-0 z-0 pointer-events-none bg-[url('/assets/images/fantasy-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" style="opacity: 0.8; filter: saturate(1.2) brightness(0.9);"></div>
+  
+  <!-- Atmospheric Gradient Fade -->
+  <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-secondary/95 via-secondary/60 to-secondary/95"></div>
+
+  <!-- Subtle Grid Background Overlay -->
+  <div class="absolute inset-0 z-0 pointer-events-none opacity-[0.03]" 
+       style="background-image: linear-gradient(#A3E635 1px, transparent 1px), linear-gradient(90deg, #A3E635 1px, transparent 1px); background-size: 40px 40px;">
+  </div>
+
+  <div class="container mx-auto px-6 md:px-12 relative z-10 flex-grow flex flex-col items-center justify-center">
+    <div class="w-full max-w-4xl bg-forest-light/20 backdrop-blur-3xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+      
+      <!-- Ambient glow -->
+      <div class="absolute -top-32 -left-32 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/20 transition-all duration-1000"></div>
+
+      <!-- Header Section -->
+      <div class="flex flex-col items-center mb-10 relative z-10 text-center">
+        <h2 class="text-4xl md:text-5xl font-rajdhani font-black text-white uppercase tracking-tighter mb-1">
+          Global <span class="text-primary italic">Leaderboard</span>
+        </h2>
+        <p class="text-gray-500 text-xs font-medium tracking-widest uppercase">Hall of Fame</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8 relative z-10">
+        <select [(ngModel)]="gameFilter" (change)="onFilterChange()" class="bg-secondary/80 border border-primary/30 rounded-lg px-4 py-3 text-white text-sm outline-none focus:border-primary transition-all font-exo uppercase tracking-widest cursor-pointer shadow-lg hover:border-primary/50">
+          <option value="all" class="text-black">All Modules</option>
+          <option value="xo" class="text-black">Tic Tac Toe</option>
+          <option value="escape-demb" class="text-black">Escape Demb</option>
+          <option value="my-planet" class="text-black">My Planet</option>
+          <option value="one-eye" class="text-black">One Eye</option>
+        </select>
+
+        <select [(ngModel)]="dateFilter" (change)="onFilterChange()" class="bg-secondary/80 border border-primary/30 rounded-lg px-4 py-3 text-white text-sm outline-none focus:border-primary transition-all font-exo uppercase tracking-widest cursor-pointer shadow-lg hover:border-primary/50">
+          <option value="all" class="text-black">All Time</option>
+          <option value="daily" class="text-black">Daily Cycle</option>
+          <option value="weekly" class="text-black">Weekly Cycle</option>
+          <option value="monthly" class="text-black">Monthly Cycle</option>
+        </select>
+      </div>
+
+      <!-- Data List -->
+      <div class="relative z-10 bg-black/40 rounded-2xl border border-white/5 overflow-hidden shadow-inner">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-primary/10 text-primary font-rajdhani text-xs uppercase tracking-widest">
+              <th class="p-4 font-bold border-b border-white/5 w-20 text-center">Rank</th>
+              <th class="p-4 font-bold border-b border-white/5">Commander</th>
+              <th class="p-4 font-bold border-b border-white/5 text-right">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of leaderboard; let i = index" class="border-b border-white/5 hover:bg-white/5 transition-colors group/row">
+              <td class="p-4 text-center font-rajdhani font-bold text-xl" [ngClass]="{'text-yellow-400': i === 0, 'text-gray-300': i === 1, 'text-amber-600': i === 2, 'text-primary': i > 2}">
+                #{{ i + 1 }}
+              </td>
+              <td class="p-4 font-exo font-medium text-white group-hover/row:text-primary transition-colors flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                </div>
+                {{ entry.nick_name || 'Unknown' }}
+              </td>
+              <td class="p-4 text-right font-rajdhani font-black tracking-widest text-lg text-white/90 group-hover/row:text-white">{{ entry.score | number }}</td>
+            </tr>
+            <tr *ngIf="leaderboard.length === 0 && !loading">
+              <td colspan="3" class="p-12 text-center text-gray-500 font-exo text-sm tracking-wider uppercase">
+                <div class="flex flex-col items-center gap-3">
+                  <svg class="w-8 h-8 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  No data found for selected filters.
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="loading">
+              <td colspan="3" class="p-12 text-center text-gray-500 font-exo text-sm tracking-wider uppercase">
+                <div class="flex flex-col items-center justify-center space-y-4">
+                  <div class="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                  <p>Accessing Network...</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</main>

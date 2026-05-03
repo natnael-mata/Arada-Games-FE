@@ -17,8 +17,18 @@ export class AuthService {
     return !!localStorage.getItem('access_token');
   }
 
+  private getDeviceId(): string {
+    let deviceId = localStorage.getItem('device_id');
+    if (!deviceId) {
+      deviceId = 'dev_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+      localStorage.setItem('device_id', deviceId);
+    }
+    return deviceId;
+  }
+
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
+    const loginData = { ...credentials, device_id: this.getDeviceId() };
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData).pipe(
       tap(response => {
         if (response && response.ok && response.token) {
           localStorage.setItem('user', JSON.stringify(response.user));

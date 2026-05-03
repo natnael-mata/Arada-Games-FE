@@ -89,6 +89,20 @@ body {
 	text-align: center;
 	z-index: 1;
 }
+#high-score {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #A3E635;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	z-index: 100;
+	text-shadow: 0 0 5px rgba(0,0,0,0.8);
+	background: rgba(0,0,0,0.5);
+	padding: 5px 10px;
+	border-radius: 5px;
+}
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
@@ -98,6 +112,7 @@ body {
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
+		<div id="high-score">High Score: Loading...</div>
 
 		<noscript>
 			Your browser does not support JavaScript.
@@ -114,6 +129,51 @@ body {
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":3718880,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
+
+// Arada Games Score Integration
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+async function saveScore(scoreValue) {
+	if (!token) return;
+	try {
+		await fetch('/api/scores', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify({
+				score: scoreValue,
+				game_mode: 'single',
+				game_slug: 'escape-demb',
+				result: 'win'
+			})
+		});
+		fetchHighScore();
+	} catch (e) {
+		console.error('Failed to save score:', e);
+	}
+}
+
+async function fetchHighScore() {
+	try {
+		const response = await fetch('/api/scores/leaderboard?game=escape-demb');
+		const data = await response.json();
+		if (data && data.length > 0) {
+			const highScore = data[0].score;
+			document.getElementById('high-score').innerText = 'High Score: ' + highScore;
+		}
+	} catch (e) {
+		console.error('Failed to fetch high score:', e);
+	}
+}
+
+// Global hooks for the game engine
+window.reportScore = saveScore;
+window.onGameOver = saveScore;
+
+fetchHighScore();
 
 (function () {
 	const statusOverlay = document.getElementById('status');
