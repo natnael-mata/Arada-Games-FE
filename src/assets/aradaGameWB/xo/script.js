@@ -1,7 +1,22 @@
 // Constants and State
 const API_BASE = '/api';
-// Connect WebSocket directly to the backend on port 3000
-const WS_URL = `ws://${window.location.hostname}:3000`;
+// Connect WebSocket — auto-detect protocol (ws/wss) and host.
+// In production the backend sits behind a reverse proxy on the same origin;
+// locally it runs on port 3000.
+const WS_URL = (() => {
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  let host = window.location.host;
+
+  // Local development: If running on Angular dev server (4200/4201), 
+  // connect to the backend on port 3000.
+  if (host.includes(':4200') || host.includes(':4201')) {
+    host = window.location.hostname + ':3000';
+  }
+
+  const url = `${protocol}//${host}/api/ws`;
+  console.log('Connecting to WebSocket at:', url);
+  return url;
+})();
 
 let gameMode = 'single'; // 'single', 'multiplayer', 'local_pvp'
 let difficulty = 'easy';
